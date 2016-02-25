@@ -1,0 +1,539 @@
+/*! normalize.css v1.1.0 | MIT License | git.io/normalize */
+
+article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block;}audio,canvas,video{display:inline-block;*display:inline;*zoom:1;}audio:not([controls]){display:none;height:0;}[hidden]{display:none;}html{font-size:100%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;}html,button,input,select,textarea{font-family:sans-serif;}body{margin:0;}a:focus{outline:thin dotted;}a:active,a:hover{outline:0;}h1{font-size:2em;margin:.67em 0;}h2{font-size:1.5em;margin:.83em 0;}h3{font-size:1.17em;margin:1em 0;}h4{font-size:1em;margin:1.33em 0;}h5{font-size:.83em;margin:1.67em 0;}h6{font-size:.67em;margin:2.33em 0;}abbr[title]{border-bottom:1px dotted;}b,strong{font-weight:bold;}blockquote{margin:1em 40px;}dfn{font-style:italic;}hr{-moz-box-sizing:content-box;box-sizing:content-box;height:0;}mark{background:#ff0;color:#000;}p,pre{margin:1em 0;}code,kbd,pre,samp{font-family:monospace,serif;_font-family:'courier new',monospace;font-size:1em;}pre{white-space:pre;white-space:pre-wrap;word-wrap:break-word;}q{quotes:none;}q:before,q:after{content:'';content:none;}small{font-size:80%;}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline;}sup{top:-0.5em;}sub{bottom:-0.25em;}dl,menu,ol,ul{margin:1em 0;}dd{margin:0 0 0 40px;}menu,ol,ul{padding:0 0 0 40px;}nav ul,nav ol{list-style:none;list-style-image:none;}img{border:0;-ms-interpolation-mode:bicubic;}svg:not(:root){overflow:hidden;}figure{margin:0;}form{margin:0;}fieldset{border:1px solid #c0c0c0;margin:0 2px;padding:.35em .625em .75em;}legend{border:0;padding:0;white-space:normal;*margin-left:-7px;}button,input,select,textarea{font-size:100%;margin:0;vertical-align:baseline;*vertical-align:middle;}button,input{line-height:normal;}button,select{text-transform:none;}button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer;*overflow:visible;}button[disabled],html input[disabled]{cursor:default;}input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0;*height:13px;*width:13px;}input[type="search"]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;}input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none;}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0;}textarea{overflow:auto;vertical-align:top;}table{border-collapse:collapse;border-spacing:0;}
+
+/* ==========================================================================
+   Additional styles for the Skeleton Theme - Replace that with your own CSS
+   ========================================================================== */
+
+/* Hiding placeholder text on focus in webkit, thanks to http://www.kolodvor.net/2012/03/23/webkit-placeholder-attribute-behavior */
+input:focus::-webkit-input-placeholder, textarea:focus::-webkit-input-placeholder { color:transparent; }
+
+/* Products grid, collections grid: we are using lists, not tables */
+ul.grid li { float: left; list-style-type: none; }
+
+ul.grid li.last-in-row { margin-right: 0; }
+
+/* Utility classes: Hidden, float lef, float right, etc. */
+
+.hidden { display: none; }
+.left { float: left; }
+.right { float: right; }
+
+/* Styling #site-title as it uses h1 on home page and span on other pages. */
+
+#site-title {
+font-size: 2em;
+font-weight: bold;
+line-height: 1.5;
+margin: 0;
+padding: 0;
+}
+
+
+/* Override to globally-hosted search.css on the /search page */
+
+#searchresults input {
+width: auto;
+}
+
+/* GRID.CSS */
+
+body {
+margin: -10px 0 0 0;
+padding:0;
+}
+
+.container {
+	max-width: 990px;
+	width: 100%;
+	margin:0 auto;
+	z-index: 10;
+}
+
+.grid_1, .grid_2, .grid_3, .grid_item {
+	float: left;
+	margin: 0 12px;
+	display: inline;
+}
+
+.container .alpha {
+  margin-left: 0;
+}
+.container .omega {
+	margin-right: 0;
+}
+
+.grid_1 {
+	max-width: 247px;
+	width: 33.3%;
+}
+.grid_2 {
+	max-width: 496px;
+	width: 66%
+}
+.grid_3 {
+	max-width: 990px;
+	width: 100%;
+}
+.grid_item {
+	max-width: 260px;
+	width: 30%;
+	margin:10px;
+	float: left;
+}
+.grid_single {
+	max-width:450px;
+	width: 63%;
+	margin: 0 auto;
+}
+.grid_one {
+	max-width: 370px;
+	width: 40%;
+	margin: 50px auto;
+	padding-left: 30px;
+}
+.push {
+	margin-left: 180px;
+}
+.push_1 {
+  margin-left: 247px;
+}
+.push_2 {
+  margin-left: 546px;
+}
+.apush {
+  padding-top: 120px;
+}
+.grid_single img {
+	margin-left: 50px;
+}
+.apush {
+	margin-top: 10px;
+}
+.apush_2 {
+	margin-top:190px;
+}
+.apush_3{
+	margin-top: 285px;
+}
+
+/* `Clear Floated Elements
+----------------------------------------------------------------------------------------------------*/
+
+/* http://sonspring.com/journal/clearing-floats */
+
+.clear {
+  clear: both;
+  display: block;
+  overflow: hidden;
+  visibility: hidden;
+  width: 0;
+  height: 0;
+}
+
+/* http://www.yuiblog.com/blog/2010/09/27/clearfix-reloaded-overflowhidden-demystified */
+
+.clearfix:before,
+.clearfix:after,
+.container_24:before,
+.container_24:after {
+  content: '.';
+  display: block;
+  overflow: hidden;
+  visibility: hidden;
+  font-size: 0;
+  line-height: 0;
+  width: 0;
+  height: 0;
+}
+
+.clearfix:after,
+.container_24:after {
+  clear: both;
+}
+
+/*
+  The following zoom:1 rule is specifically for IE6 + IE7.
+  Move to separate stylesheet if invalid CSS is a problem.
+*/
+
+.clearfix,
+.container_24 {
+  zoom: 1;
+}
+
+/* MAIN.CSS */
+
+/* General */
+html {
+	background: #fff;
+}
+body {
+	background-color: #fff;
+	color:#000;	
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;         /* Opera/IE 8+ */
+	font-size: 13px;
+}
+
+body.home {
+	background: url( {{'bg_home.jpg'|asset_url }} ) no-repeat;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	width: 100%;
+	min-height: 1200px;
+}
+
+img.logo {
+	position: absolute;
+   	top: 50%;
+   	left: 50%;
+   	width: 298px;
+   	height: 185px;
+   	margin-top: -92px; /* Half the height */
+   	margin-left: -120px; /* Half the width */
+}
+
+img.full {
+	width: 100%;
+	margin: 0 auto;
+	z-index: 10;
+	position: relative;
+}
+ul{ 
+	padding: 0;
+}
+h1 {
+	margin-top:0;
+	font-size: 20px;
+	font-weight: normal;
+}
+h2 {
+	margin-top: 0;
+	font-size: 14px;
+}
+	h2 a {
+		color: #17CE4B;
+		text-decoration: none;
+	}
+p.product-price {
+	font-size: 10px;
+}
+p.article-title{
+	margin: 0;
+}
+	p.article-title a {
+		color:#17ce4b;
+		text-decoration: none;
+	}
+nav {
+	background: #fff;
+	position: fixed;
+	width: 990px;
+	border-bottom: 2px solid #17CE4B;
+	height: 110px;
+	display: inline;
+	z-index: 100;
+}
+	nav.submenu {
+		border-bottom: 1px solid #000;
+		height: 60px;
+		margin-top: -18px;
+	}
+	nav.submenu ul {
+		margin: 20px 0;
+	}
+	nav img.navlogo, #navlogo {
+		display: inline;
+		float: left;
+		margin: 55px 75px 0 0;
+	}
+	nav ul {
+		margin:60px 0 0 0;
+		float: right;
+	}
+	nav ul li {
+		display: inline;
+		margin-right: 15px;
+	}
+		nav ul li:last-child {
+			margin-right: 0;
+		}
+		nav ul li a {
+			text-decoration: none;
+			color: #000;
+		}
+		nav ul li.current_page_item a, .active a, .info a, .navigation span a, a.more, p a:visited, table a, a{
+			color: #17CE4B;
+			text-decoration: none;
+		}
+p.checkout-link {
+	display: inline;
+	float: right;
+	right: 0;
+	position: absolute;
+}
+	p.checkout-link a {
+		color: #17CE4B;
+	}
+
+li.grid_item {
+	list-style-type: none;
+	float: left;
+	height: 240px;
+}
+ul.product-photo-thumbs {
+	margin: 0 auto;
+	width:990px;
+}
+ul.product-photo-thumbs li {
+	list-style-type: none;
+	margin: 0 auto;
+	width: 100%;
+}
+.info {
+	text-align: center;
+	margin-bottom: 50px
+}
+	.info p {
+		margin-top: 10px;
+	}
+.product {
+	overflow: hidden;
+	height:210px;
+	margin-top: 20px;
+}
+	.product img {
+		height: 100%;
+		margin:0 auto;
+		display: block;
+	}
+.columns{
+	-moz-column-count: 2;
+    -moz-column-gap: 24px;
+    -webkit-column-count: 2;
+    -webkit-column-gap: 24px;
+    column-count: 2;
+	column-gap: 24px;
+	margin: 0 0 50px 0;
+}
+.divider {
+	width: 100%;
+	height: 1px;
+	background-color: #000;
+	margin: 40px 0; 
+}
+#fixie {
+	position: absolute;
+	background-color: #fff;
+	width: 990px;
+	margin-top: 100px;
+	border-top: 1px solid #000000;
+	border-bottom: 1px solid #000;
+	padding: 20px 0;
+}
+
+form {
+
+}
+	form .selector-wrapper {
+		margin-top: 24px;
+	}
+	label {
+		width: 60px;
+		text-align: right;
+		margin-right: 24px;
+		float: left;
+	}
+	select {
+		width: 160px;
+	}
+	textarea {
+		width: 100%;
+		resize:none;
+		height: 150px;
+		color: #000;
+		border:1px solid #000;
+		-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+		-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+		box-sizing: border-box;         /* Opera/IE 8+ */
+		padding: 24px;
+	}
+.product-add input,  {
+	float: right;
+	padding:10px;
+	width: 100px;
+	height: 30px;
+	background: #fff;
+	border:none;
+	color: #17CE4B
+}
+input[type=submit] {
+	height: 30px;
+	background: transparent;
+	border:none;
+	color: #17CE4B;
+	float:right;
+}
+.navigation {
+	margin:20px 0;
+}
+time {
+	float: left;
+}
+a.more {
+	clear: both;
+	margin-top: 76px;
+	float: left;
+}
+table {
+	width: 100%;
+	margin: 50px 0;
+	border-collapse: collapse;
+}
+	thead {
+		text-align: left;
+		border-bottom: 1px solid #000;
+		height: 50px;
+	}
+		thead tr th {
+			font-weight: normal;
+		}
+		tbody tr {
+			padding-top: 20px;	
+		}
+		td, tr {
+			vertical-align: top;
+		}
+	table p, table h2, table a, table img, table input {
+		margin-top: 20px;
+	}
+ul.home {
+	width: 800px;
+	float: left;
+    left: 50%;
+    margin-left: -370px;
+    position: absolute;
+    top: 80%;
+    font-size: 20px
+}
+ul.home li {
+	list-style-type: none;
+	display: inline;
+	margin-left: 30px;
+}
+ul.home li a {
+	color: #fff;
+}
+
+#product-variants label {
+	float: left;
+	text-align: left;
+}
+.tester{
+	width: 100%;
+	height: 312px;
+	background-color: #fff;
+	position: fixed;
+	z-index: 5;
+}
+.back {
+	position: relative;
+	z-index: 0 !important;
+}
+body.template-collection .grid_item a img {
+	height: 160px;
+}
+.grid_prods {
+	margin: 0 auto;
+    width: 840px;
+}
+.grid_items {
+	float: left;
+    margin: 10px;
+    max-width: 227px;
+    width: 25%;
+    height: 210px;
+}
+	.grid_items img{
+		display: block;
+		margin: 0 auto;
+		width: 100%;
+		height:160px;
+	}
+.meta {
+	margin: 60px 0;
+	border-bottom: 1px solid #000;
+}
+
+/*
+ * jQuery Blueberry Slider v0.4 BETA
+ * http://marktyrrell.com/labs/blueberry/
+ *
+ * Copyright (C) 2011, Mark Tyrrell <me@marktyrrell.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
+
+.blueberry { margin: 0 auto; }
+.blueberry .slides {
+	display: block;
+	position: relative;
+	overflow: hidden;
+}
+.blueberry .slides li {
+	position: absolute;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+}
+.blueberry .slides li img {
+	display: block;
+	width: 100%;
+	max-width: none;
+}
+.blueberry .slides li.active { display: block; position: relative; }
+.blueberry .crop li img { width: auto; }
+
+.blueberry .pager {
+	height: 40px;
+	text-align: center;
+}
+.blueberry .pager li { display: inline-block; }
+.blueberry .pager li a,
+.blueberry .pager li a span {
+	display: block;
+	height: 4px;
+	width: 4px;
+}
+.blueberry .pager li a {
+	padding: 18px 8px;
+-webkit-border-radius: 6px;
+   -moz-border-radius: 6px;
+	border-radius: 6px;
+}
+.blueberry .pager li a span {
+	overflow: hidden;
+	background: #c0c0c0;
+	text-indent: -9999px;
+-webkit-border-radius: 2px;
+   -moz-border-radius: 2px;
+	border-radius: 2px;
+}
+.blueberry .pager li.active a span { background: #404040; }
