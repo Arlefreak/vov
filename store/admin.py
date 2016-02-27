@@ -24,6 +24,8 @@ class ProductAdmin(OrderedModelAdmin, ImportExportModelAdmin):
         'date',
         'image_img'
     )
+    list_editable= ('price','status', 'inventory',)
+    list_display_links = ('sku', 'name')
     inlines = [ ProductImagesInline ]
     list_filter = ('category',)
     search_fields = ('name', 'sku',)
