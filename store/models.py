@@ -7,6 +7,7 @@ from django_countries.fields    import CountryField
 from django.utils.translation   import ugettext_lazy as _
 from ordered_model.models       import OrderedModel
 from solo.models                import SingletonModel
+from embed_video.fields         import EmbedVideoField
 import os
 
 def upload_image_to(instance, filename):
@@ -243,3 +244,59 @@ class Store(SingletonModel):
     description   = models.TextField('Description', default='')
     name          = models.CharField('Name',default='', max_length=140)
 
+class Press (OrderedModel):
+    slug          = models.SlugField('Slug', unique=True, max_length=50, editable=False)
+    title         = models.CharField('Title',default='', max_length=140)
+    text          = models.TextField('Text', default='', blank=True)
+    publish       = models.BooleanField('Publish', default=False)
+    date          = models.DateField('Date added', auto_now_add=True)
+    updated       = models.DateField('Date updated', auto_now=True)
+    class Meta:
+        ordering  = ['order', 'date', 'slug']
+        verbose_name = 'press'
+        verbose_name_plural = 'press items'
+    def __unicode__(self):
+        return u'%s' % (self.slug)
+    def __str__(self):
+        return u'%s' % (self.slug)
+    def save(self, *args, **kwargs):
+        self.slug = uuslug(self.slug, instance=self, slug_field='slug')
+        super(Press, self).save(**kwargs)
+
+class PressImage(OrderedModel):
+    press      = models.ForeignKey('Press')
+    name         = models.CharField('Name',default='', max_length=140)
+    image         = models.ImageField('Image', upload_to=upload_image_to)
+    date         = models.DateField('Date added', auto_now_add=True)
+    updated      = models.DateField('Date updated', auto_now=True)
+    class Meta:
+        ordering = ['order', 'date']
+        verbose_name = 'image'
+        verbose_name_plural = 'images'
+    def __unicode__(self):
+        return u'%s' % (self.image.url)
+    def __str__(self):
+        return u'%s' % (self.image.url)
+    def image_img(self):
+        if self.image:
+            return u'<img src="%s" style="width: 100px;'\
+                ' height: auto; display: block;"/>' % self.image.url
+        else:
+            return 'No Image'
+    image_img.short_description = 'image'
+    image_img.allow_tags = True
+
+class VideoPress(OrderedModel):
+    press      = models.ForeignKey('Press')
+    name         = models.CharField('Name',default='', max_length=140)
+    video       = EmbedVideoField()
+    date         = models.DateField('Date added', auto_now_add=True)
+    updated      = models.DateField('Date updated', auto_now=True)
+    class Meta:
+        ordering = ['order', 'date']
+        verbose_name = 'video'
+        verbose_name_plural = 'video'
+    def __unicode__(self):
+        return u'%s' % (self.video.url)
+    def __str__(self):
+        return u'%s' % (self.video.url)

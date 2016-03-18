@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'ordered_model',
     'import_export',
+    'embed_video',
     'solo',
     'taggit',
     'taggit_serializer',
