@@ -89,6 +89,8 @@ def CategoryListView(request):
 
 def ProductsListView(request, category_name):
     p_list = ProductVariant.objects.filter(product__category__sku=category_name)
+    if(p_list is None):
+        p_list = Product.objects.filter(category__sku=category_name)
     single = get_object_or_404(Category, sku=category_name)
     title  = "vov - cat"
     description = "store"
