@@ -98,8 +98,9 @@ def ProductsListView(request, category_name):
     context = {'p_list': p_list, 'single': single, 'title': title, 'description': description}
     return render(request, template_name, context)
 
-def ProductsSingleView(request, category_name, product_name):
-    p_list = ProductVariant.objects.filter(product__sku=product_name)
+def ProductsSingleView(request, category_name, product_name, variant_name):
+    p_list = get_object_or_404(ProductVariant, sku=variant_name)
+    p_list = p_list.gallery
     single = get_object_or_404(Product, sku=product_name)
     title  = "vov - product"
     description = "store"
