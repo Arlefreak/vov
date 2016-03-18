@@ -22,7 +22,7 @@
             <div class="grid_3 alpha omega">
                 {% for item in p_list %}
                     {% for image in item.gallery %}
-                    <img src="//cdn.shopify.com/s/files/1/0288/1370/products/BackpackAzulMarino_5.JPG?v=1432219568" alt="Backpack Azul Marino" class="full"/>
+                    <img src="{{image.url}}" alt="Backpack Azul Marino" class="full"/>
                     {% endfor %}
                 {% endfor %}
             </div>
