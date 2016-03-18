@@ -7,12 +7,21 @@ from django_countries.fields    import CountryField
 from django.utils.translation   import ugettext_lazy as _
 from ordered_model.models       import OrderedModel
 from solo.models                import SingletonModel
+import os
+
+def upload_image_to(instance, filename):
+    from django.utils.timezone import now
+    filename_base, filename_ext = os.path.splitext(filename)
+    return 'uploads/%s%s%s' % (
+        filename_base,
+        now().strftime("%Y%m%d%H%M%S"),
+        filename_ext.lower(),)
 
 class Product (OrderedModel):
     sku           = models.SlugField('SKU', unique=True, max_length=50, editable=False)
     name          = models.CharField('Name',default='', max_length=140)
     description   = models.TextField('Description', default='', blank=True)
-    image         = models.ImageField('Main image', blank=True, null=True)
+    image         = models.ImageField('Main image', upload_to=upload_image_to, blank=True, null=True)
     price         = models.FloatField('Price', default=0.0)
     discount      = models.FloatField('Discount', default=0.0)
     tags          = TaggableManager(blank=True)
@@ -89,7 +98,7 @@ class ProductVariant(OrderedModel):
 class ProductImages(OrderedModel):
     product      = models.ForeignKey('ProductVariant')
     name         = models.CharField('Name',default='', max_length=140)
-    image        = models.ImageField('Image')
+    image         = models.ImageField('Image', upload_to=upload_image_to)
     date         = models.DateField('Date added', auto_now_add=True)
     updated      = models.DateField('Date updated', auto_now=True)
     class Meta:
@@ -104,7 +113,7 @@ class ProductImages(OrderedModel):
 class Category(OrderedModel):
     sku           = models.SlugField('SKU', unique=True, max_length=50, editable=False)
     name         = models.CharField('Name',default='', max_length=140)
-    image        = models.ImageField('Image', blank=True, null=True)
+    image        = models.ImageField('Image', upload_to=upload_image_to, blank=True, null=True)
     date         = models.DateField('Date added', auto_now_add=True)
     updated      = models.DateField('Date updated', auto_now=True)
     class Meta:
