@@ -21,7 +21,7 @@
             {% if p_list %}
             <div class="grid_3 alpha omega">
                 {% for item in p_list %}
-                <img src="{{item.image}}" alt="{{item.name}}" class="full"/>
+                <img src="{{item.image.url}}" alt="{{item.name}}" class="full"/>
                 {% endfor %}
             </div>
             {% endif %}
