@@ -15,9 +15,13 @@ router.register(r'tag', views.TaggitViewSet)
 urlpatterns = [
     url(r'^api/', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^', views.HomeView.as_view()),
-    url(r'^about/', views.HomeView.as_view()),
-    url(r'^contact/', views.HomeView.as_view()),
-    url(r'^prensa/', views.HomeView.as_view()),
-    url(r'^productos/', views.HomeView.as_view()),
+    url(r'^$', views.HomeView, name='home'),
+    url(r'^about/$', views.AboutView, name='about'),
+    url(r'^productos/$', views.CategoryListView, name='categories'),
+    url(r'^productos/(?P<category_name>[\w-]+)/$', views.ProductsListView, name='products'),
+    url(r'^productos/(?P<category_name>[\w-]+)/(?P<product_name>[\w-]+)/$', views.ProductsSingleView, name='product'),
+    url(r'^colabs/$', views.ProductsListView, name='colabs'),
+    url(r'^prensa/$', views.PressListView, name='press'),
+    url(r'^prensaS/$', views.PressSingleView, name='pres'),
+    url(r'^contact/$', views.ContactView, name='contact'),
 ]

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from ordered_model.admin import OrderedModelAdmin
-from .models import Product, Adress, Client, Order, ShoppingCartProduct, Category, ProductImages
+from .models import Product, Adress, Client, Order, ShoppingCartProduct, Category, ProductImages, ProductVariant
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
@@ -9,7 +9,20 @@ class ProductResource(resources.ModelResource):
     class Meta:
         model = Product
 
-class ProductImagesInline(admin.TabularInline):
+class ProductVariantResource(resources.ModelResource):
+    class Meta:
+        model = ProductVariant
+
+class CategoryResource(resources.ModelResource):
+    class Meta:
+        model = Category
+
+
+class productVariantInline(admin.TabularInline):
+    model = ProductVariant
+    extra = 0
+
+class productImagesInline(admin.TabularInline):
     model = ProductImages
     extra = 0
 
@@ -18,18 +31,45 @@ class ProductAdmin(OrderedModelAdmin, ImportExportModelAdmin):
         'move_up_down_links',
         'sku',
         'name',
-        'inventory',
+        'stock',
         'price',
         'status',
         'date',
-        'image_img'
+        'image_img',
     )
-    list_editable= ('price','status', 'inventory',)
+    list_editable= ('price', )
     list_display_links = ('sku', 'name')
-    inlines = [ ProductImagesInline ]
+    inlines = [ productVariantInline ]
     list_filter = ('category',)
     search_fields = ('name', 'sku',)
     resource_class = ProductResource
+
+class ProductVariantAdmin(OrderedModelAdmin, ImportExportModelAdmin):
+    list_display = (
+        'move_up_down_links',
+        'product',
+        'sku',
+        'inventory',
+        'date',
+        'image_img',
+    )
+    list_editable= ('inventory',)
+    list_display_links = ('sku', 'product', 'image_img')
+    inlines = [ productImagesInline ]
+    list_filter = ('product',)
+    search_fields = ('name', 'sku',)
+    resource_class = ProductVariantResource
+
+class CategoryAdmin(OrderedModelAdmin, ImportExportModelAdmin):
+    list_display = (
+        'move_up_down_links',
+        'sku',
+        'name',
+        'image_img',
+    )
+    list_display_links = ('sku', 'name', 'image_img')
+    search_fields = ('name', 'sku',)
+    resource_class = CategoryResource
 
 class AdressAdmin(admin.ModelAdmin):
     list_display = ('client', 'name', 'type', 'default', 'country', 'zipcode')
@@ -60,8 +100,9 @@ class ShoppingCartProductAdmin(admin.ModelAdmin):
     list_display = ('client', 'product', 'cuantity')
 
 admin.site.register(Product, ProductAdmin)
-admin.site.register(Adress, AdressAdmin)
-admin.site.register(Client, ClientAdmin)
-admin.site.register(Order, OrderAdmin)
-admin.site.register(Category)
-admin.site.register(ShoppingCartProduct, ShoppingCartProductAdmin)
+admin.site.register(ProductVariant, ProductVariantAdmin)
+admin.site.register(Category, CategoryAdmin)
+# admin.site.register(Adress, AdressAdmin)
+# admin.site.register(Client, ClientAdmin)
+# admin.site.register(Order, OrderAdmin)
+# admin.site.register(ShoppingCartProduct, ShoppingCartProductAdmin)

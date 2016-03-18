@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% block content %}
+<div class="container apush">
+    <div class="grid_2 omega push_1">
+        <div class="blueberry">
+            <ul class="slides">
+                <li><img src="//cdn.shopify.com/s/files/1/0288/1370/files/01_large.jpg?3136" /></li>
+                <li><img src="//cdn.shopify.com/s/files/1/0288/1370/files/IMG_8415_large.JPG?5003" /></li>
+                <li><img src="//cdn.shopify.com/s/files/1/0288/1370/files/IMG_8434_large.JPG?5004" /></li>
+                <li><img src="//cdn.shopify.com/s/files/1/0288/1370/files/IMG_8442_large.JPG?5005" /></li>
+            </ul>
+        </div>
+        <p>
+            En vvvvovvvv –se pronuncia vov– ponemos el acento en la utilidad y la sencillez. Somos productores de accesorios únicos para hombres y mujeres que buscan utilidad y buen diseño, lo necesario para acompañar su rutina diaria.<br /><br />Nuestras mochilas están hechas a mano en México DF bajo una rigurosa selección de los mejores materiales, entre pieles recicladas y otras telas. Cada una está debidamente identificada con un número de serie que te brinda la seguridad de que estás recibiendo una pieza única.<br /><br />En vvvvovvvv nos apasiona poder compartir este proceso creativo de forma conjunta con nuestros clientes. A través de diseños modernos y sencillos, proyectamos en accesorios de gran utilidad un estilo de vida práctico y distinguido.
+        </p>
+    </div>
+</div>
+
+{% endblock %}
+{% block FooterReferences %}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="//cdn.shopify.com/s/files/1/0288/1370/t/2/assets/jquery.blueberry.js?3005423940968824939"></script>
+    <script type="text/javascript">
+        $(window).load(function() {
+        $(".Historial").addClass("hidden");   
+        $(".Colaboraciones").addClass("hidden");
+        $('.blueberry').blueberry();
+    });
+    </script>
+{% endblock %}

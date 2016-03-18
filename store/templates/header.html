@@ -1,0 +1,21 @@
+<header>
+    <div class="container">  
+        <nav role="navigation">
+            <a id="navlogo" href="/" role="banner">
+                <img src="//cdn.shopify.com/s/files/1/0288/1370/t/2/assets/logo.png?3005423940968824939" alt="VVVVOVVVV" />
+            </a>
+            <a id="site-title" href="/" class="hidden">VVVVOVVVV</a>
+            <ul class="nav">
+                {% for page in menu %}
+                <li class="
+                    nav-item
+                    {% if page.active %} active{% endif %}
+                    {% if forloop.counter0 == 0 %} first-item{% endif %}
+                ">
+                <a href="{{page.url}}" title="{{page.name}}">{{page.name}}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </nav>
+    </div> 
+</header>

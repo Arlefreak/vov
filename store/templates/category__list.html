@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% block content %}
+<div class="container apush">
+    <div class="grid_prods">
+        {% for item in p_list %}
+        <div class="grid_item">
+            <div class="product">  
+                <a href="{% url 'products' item.sku %}">
+                    <img src="{{item.image.url}}" alt="{{item.name}}" />
+                </a>
+            </div>
+            <div class="info">
+                <p><a class="coll-title" href="{% url 'products' item.sku %}">{{item.name}}</a></p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

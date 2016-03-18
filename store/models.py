@@ -11,18 +11,16 @@ from solo.models                import SingletonModel
 class Product (OrderedModel):
     sku           = models.SlugField('SKU', unique=True, max_length=50, editable=False)
     name          = models.CharField('Name',default='', max_length=140)
-    description   = models.TextField('Description', default='')
+    description   = models.TextField('Description', default='', blank=True)
     image         = models.ImageField('Main image', blank=True, null=True)
     price         = models.FloatField('Price', default=0.0)
     discount      = models.FloatField('Discount', default=0.0)
-    inventory     = models.IntegerField('Inventory', default=0)
     tags          = TaggableManager(blank=True)
     category      = models.ForeignKey('Category')
     statusChoices = (('IN','In stock'),('OUT','Out of stock'))
-    status        = models.CharField('Status', choices=statusChoices, max_length=3, default='OUT')
+    status        = models.CharField('Status', choices=statusChoices, max_length=3, default='OUT', editable=False)
     date          = models.DateField('Date added', auto_now_add=True)
     updated       = models.DateField('Date updated', auto_now=True)
-    url           = models.URLField('URL', blank=True, null=True)
     class Meta:
         ordering  = ['order', 'date', 'sku']
         verbose_name = 'product'
@@ -33,6 +31,14 @@ class Product (OrderedModel):
         return u'%s' % (self.sku)
     def save(self, *args, **kwargs):
         self.sku = uuslug(self.name, instance=self, slug_field='sku')
+        variants = ProductVariant.objects.filter(product=self)
+        stock = 0
+        for item in variants:
+            stock += item.inventory
+        if( stock > 0):
+            self.status = 'IN'
+        else:
+            self.status = 'OUT'
         super(Product, self).save(**kwargs)
     def image_img(self):
         if self.image:
@@ -40,11 +46,48 @@ class Product (OrderedModel):
                 ' height: auto; display: block;"/>' % self.image.url
         else:
             return 'No Image'
-    image_img.short_description = 'Image'
+    def stock(self):
+        variants = ProductVariant.objects.filter(product=self)
+        stock = 0
+        for item in variants:
+            stock += item.inventory
+        return stock
+
+    image_img.short_description = 'image'
+    image_img.allow_tags = True
+
+class ProductVariant(OrderedModel):
+    product      = models.ForeignKey('Product')
+    name         = models.CharField('Name',default='', max_length=140)
+    sku           = models.SlugField('SKU', unique=True, max_length=50, editable=False)
+    inventory     = models.IntegerField('Inventory', default=0)
+    date          = models.DateField('Date added', auto_now_add=True)
+    updated       = models.DateField('Date updated', auto_now=True)
+    def save(self, *args, **kwargs):
+        self.sku = uuslug(self.name, instance=self, slug_field='sku')
+        super(ProductVariant, self).save(**kwargs)
+    def gallery(self):
+        gal = ProductImages.objects.filter(product=self)
+        return gal
+    def image(self):
+        img = ProductImages.objects.filter(product=self).first()
+        if(img):
+            return img
+        else:
+            return 'No Image'
+        return
+    def image_img(self):
+        image = ProductImages.objects.filter(product=self).first()
+        if image:
+            return u'<img src="%s" style="width: 100px;'\
+                ' height: auto; display: block;"/>' % image.image.url
+        else:
+            return 'No Image'
+    image_img.short_description = 'image'
     image_img.allow_tags = True
 
 class ProductImages(OrderedModel):
-    product      = models.ForeignKey('Product')
+    product      = models.ForeignKey('ProductVariant')
     name         = models.CharField('Name',default='', max_length=140)
     image        = models.ImageField('Image')
     date         = models.DateField('Date added', auto_now_add=True)
@@ -59,6 +102,7 @@ class ProductImages(OrderedModel):
         return u'%s' % (self.image.url)
 
 class Category(OrderedModel):
+    sku           = models.SlugField('SKU', unique=True, max_length=50, editable=False)
     name         = models.CharField('Name',default='', max_length=140)
     image        = models.ImageField('Image', blank=True, null=True)
     date         = models.DateField('Date added', auto_now_add=True)
@@ -71,6 +115,17 @@ class Category(OrderedModel):
         return u'%s' % (self.name)
     def __str__(self):
         return u'%s' % (self.name)
+    def save(self, *args, **kwargs):
+        self.sku = uuslug(self.name, instance=self, slug_field='sku')
+        super(Category, self).save(**kwargs)
+    def image_img(self):
+        if self.image:
+            return u'<img src="%s" style="width: 100px;'\
+                ' height: auto; display: block;"/>' % self.image.url
+        else:
+            return 'No Image'
+    image_img.short_description = 'Image'
+    image_img.allow_tags = True
 
 class Client(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
