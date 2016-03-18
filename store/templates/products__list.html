@@ -19,7 +19,7 @@
             <div class="grid_items">
                 <a href="{% url 'product' single.sku item.product.sku item.sku%}">
                     <img src="{{ item.image }}" alt="Backpack" />
-                    <p class="info">{{ item.product.description }}</p>
+                    <p class="info">{{ item.name }}</p>
                 </a>
             </div>
             {% endfor %} 
