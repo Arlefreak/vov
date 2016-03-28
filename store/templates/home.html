@@ -5,7 +5,7 @@
 <main class="home">
     <article class="">
         <img class="logo" src="{% static "img/logo.svg"%}" alt="logo">
-        <nav class="navigation home">
+        <nav class="navigation">
             <ul>
                 {% for page in menu %}
                 <li class="nav-item{% if page.active %} active{% endif %}{% if forloop.counter0 == 0 %} first-item{% endif %}">

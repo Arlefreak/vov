@@ -785,6 +785,11 @@ a {
   height: auto;
   margin: 0 auto 15vh auto;
 }
+@media screen and (max-width: 768px) {
+  .home .logo {
+    margin: 0 auto 5vh auto;
+  }
+}
 .home nav {
   width: 100%;
 }
