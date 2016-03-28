@@ -1,0 +1,28 @@
+.home
+    background url('https://cdn.shopify.com/s/files/1/0288/1370/t/2/assets/bg_home.jpg?5100') no-repeat center center fixed
+    background-size cover
+    width 100vw
+    height 100vh
+    overflow hidden
+    article
+        width 100%
+        height auto
+        text-align center
+        padding 20vh 0 20vh 0
+        box-sizing border-box
+    .logo
+        display block
+        width 90%
+        max-width 300px
+        height auto
+        margin 0 auto 15vh auto
+    nav
+        width 100%
+        li
+            display inline-block
+            margin 0 10px 0 10px
+            @media screen and (max-width: $max-width-mobile)
+                display block
+                margin 10px auto 10px auto
+            a
+                color $color2

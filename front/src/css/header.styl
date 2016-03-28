@@ -1,0 +1,47 @@
+header
+    width 100%
+    box-sizing border-box
+    border-bottom 2px solid $color3
+    padding 20px 0 20px 0
+    margin 30px 0 30px 0
+    h1
+        width 70%
+        max-width 1024px
+        margin auto
+        display inline-block
+        text-align left
+        font-size 3.0em
+        font-weight 700
+    nav
+        display block
+        width 60%
+        float right
+        font-size 0.8em
+        padding 5px 0 5px 0
+        box-sizing border-box
+        text-align right
+        li
+            display inline-block
+            margin 0 5px 0 5px
+        @media screen and (max-width: $max-width-mobile)
+            display block
+            float none
+            clear both
+            width 100%
+            text-align center
+            margin 30px 0 0px 0
+    img
+        width 40%
+        max-width 250px
+        height auto
+        display inline-block
+        @media screen and (max-width: $max-width-mobile)
+            margin auto
+            display block
+            width 100%
+    a
+        color $black
+        transition color 0.5s ease
+        &:hover
+        .active
+            color $color3

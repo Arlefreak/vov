@@ -1,0 +1,46 @@
+.blueberry
+    margin 0 auto
+    .slides
+        display block
+        position relative
+        overflow hidden
+        li
+            position absolute
+            top 0
+            left 0
+            overflow hidden
+            img
+                display block
+                width 100%
+                max-width none
+            &.active
+                display block
+                position relative
+    .crop
+        li
+            img
+                width auto
+    .pager
+        height 40px
+        text-align center
+        li
+            display inline-block
+            a
+                padding 18px 8px
+                border-radius 6px
+                span
+                    overflow hidden
+                    background #c0c0c0
+                    text-indent -9999px
+                    border-radius 2px
+            &.active
+                a
+                    span
+                        background #404040
+
+.blueberry .pager li a,
+.blueberry .pager li a span
+    display block
+    height 4px
+    width 4px
+
