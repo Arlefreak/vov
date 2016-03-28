@@ -603,6 +603,9 @@ a {
     margin: 20px auto 20px auto;
   }
 }
+.price {
+  color: #17ce4b;
+}
 .press {
   width: 100%;
 }

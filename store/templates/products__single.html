@@ -3,7 +3,7 @@
 {% block content %}
 <main class="wrapper">
     <section class="main-image">
-        <img src="{{ single.image.url }}" alt="{{ single.name }}"/>
+        <img src="{{ p_list.0.image.url }}" alt="{{ single.name }}"/>
     </section>
     <section class="item-info">
         <h2>{{ single.name }}</h2>
@@ -18,8 +18,7 @@
         {% for item in p_list %}
             <li>
                 <div
-                    style="background-image: url('{{item.image.url}}')"
-                    ></div>
+                    style="background-image: url('{{item.image.url}}')"></div>
             </li>
         {% endfor %}
     </ul>
