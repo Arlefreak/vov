@@ -2,20 +2,14 @@
 {% load static from staticfiles %}
 {% block content %}
 <main class="wrapper">
-    <section class="main-image">
-        <img src="https://vov.s3.amazonaws.com/uploads/categories/Backpacks.jpg" alt="category">
-    </section>
-    <section class="item-info">
-        <h2>Category</h2>
-        <p>
-            Nuestras mochilas están hechas a mano en México DF bajo una rigurosa selección de los mejores materiales, entre pieles recicladas y otras telas. Cada una está debidamente identificada con un número de serie que te brinda la seguridad de que estás recibiendo una pieza única.
-        </p>
-    </section>
     <ul class="catalog">
         {% for item in p_list %}
         <li>
             <a href="{% url 'products' item.sku %}">
-                <img src="{{item.image.url}}" alt="{{item.name}}" />
+                <div
+                    style="background-image: url('{{item.image.url}}')"
+                    ></div>
+                <!-- <img src="{{item.image.url}}" alt="{{item.name}}" /> -->
                 <p>{{item.name}}</p>
             </a>
         </li>

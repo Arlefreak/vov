@@ -534,6 +534,15 @@ a {
 .catalog li a:hover {
   color: #17ce4b;
 }
+.catalog li a div {
+  width: 100%;
+  padding: 0 0 100% 0;
+  background: #17ce4b;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  background-position: 50%, 50%;
+}
 .main-image {
   width: 100%;
 }
@@ -556,6 +565,7 @@ a {
   display: -ms-flexbox;
   display: box;
   display: flex;
+  margin: 0 0 20px 0;
 }
 @media screen and (max-width: 768px) {
   .item-info {
