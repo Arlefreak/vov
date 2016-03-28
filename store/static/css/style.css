@@ -508,7 +508,7 @@ a {
   display: block;
   float: left;
   width: 20%;
-  margin: 0 2.5% 0 2.5%;
+  margin: 0 2.5% 20px 2.5%;
   text-align: center;
 }
 @media screen and (max-width: 768px) {
@@ -534,7 +534,7 @@ a {
 .catalog li a:hover {
   color: #17ce4b;
 }
-.catalog li a div {
+.catalog li div {
   width: 100%;
   padding: 0 0 100% 0;
   background: #17ce4b;
@@ -545,6 +545,7 @@ a {
 }
 .main-image {
   width: 100%;
+  margin: 0 auto 20px auto;
 }
 .main-image img {
   max-width: 100%;

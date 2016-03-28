@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% block content %}
+<main class="wrapper">
+    <section class="main-image">
+        <img src="{{ single.image.url }}" alt="{{ single.name }}"/>
+    </section>
+    <section class="item-info">
+        <h2>{{ single.name }}</h2>
+        <p>
+            {{ single.description }}
+        </p>
+        <div class="price">
+            <p>{{ single.price }}</p>
+        </div>
+    </section>
+    <ul class="catalog">
+        {% for item in p_list %}
+            <li>
+                <div
+                    style="background-image: url('{{item.image.url}}')"
+                    ></div>
+            </li>
+        {% endfor %}
+    </ul>
+</main>
+{% endblock %}
