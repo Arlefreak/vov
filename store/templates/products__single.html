@@ -11,14 +11,13 @@
             {{ single.description }}
         </p>
         <div class="price">
-            <p>{{ single.price }}</p>
+            <p>${{ single.price }}</p>
         </div>
     </section>
     <ul class="catalog">
         {% for item in p_list %}
             <li>
-                <div
-                    style="background-image: url('{{item.image.url}}')"></div>
+                <div style="background-image: url('{{item.image.url}}')"></div>
             </li>
         {% endfor %}
     </ul>
