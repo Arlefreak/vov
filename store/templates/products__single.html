@@ -16,13 +16,11 @@
     </section>
     <ul class="catalog">
         {% for item in p_list %}
-            {% for image in item.gallery %}
             <li>
                 <div
-                    style="background-image: url('{{item.image}}')"
+                    style="background-image: url('{{item.image.url}}')"
                     ></div>
             </li>
-            {% endfor %}
         {% endfor %}
     </ul>
 </main>
