@@ -1,31 +1,27 @@
 {% extends 'base.html' %}
 {% load static from staticfiles %}
 {% block content %}
-<div class="container apush">
-    <div class="container">
-        <div>
-            <div class="grid_3 fixie alpha omega">
-                <img src="{{ single.image.url }}" class="full" />
-                <div class="divider"></div>
-                <h1>{{ single.name }}</h1>
-                <h2 class="delta"><a href="/collections/vendors?q=VOV" title="">VOV</a></h2>
-                <div id="product-description" class="rte"></div>
-                <div id="shopify-product-reviews"></div>
-                <div id="product-price" class="delta">
-                    <p>
-                        <span class="product-price">$ {{ single.price }}</span>
-                    </p>
-                </div>
-                <div class="divider"></div>
-            </div>
-            {% if p_list %}
-            <div class="grid_3 alpha omega">
-                {% for item in p_list %}
-                <img src="{{item.image.url}}" alt="{{item.name}}" class="full"/>
-                {% endfor %}
-            </div>
-            {% endif %}
+<main class="wrapper">
+    <section class="main-image">
+        <img src="{{ single.image.url }}" alt="{{ single.name }}"/>
+    </section>
+    <section class="item-info">
+        <h2>{{ single.name }}</h2>
+        <p>
+            {{ single.description }}
+        </p>
+        <div class="price">
+            <p>{{ single.price }}</p>
         </div>
-    </div>
-</div>
+    </section>
+    <ul class="catalog">
+        {% for item in p_list %}
+        <li>
+            <div
+                style="background-image: url('{{item.image}}')"
+                ></div>
+        </li>
+        {% endfor %}
+    </ul>
+</main>
 {% endblock %}
