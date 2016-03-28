@@ -22,7 +22,12 @@ header
         text-align right
         li
             display inline-block
-            margin 0 5px 0 5px
+            margin 0 1% 0 1%
+            @media screen and (max-width: $max-width-mobile)
+                display block
+                width 100%
+                text-align center
+                margin 0 0 15px 0
         @media screen and (max-width: $max-width-mobile)
             display block
             float none
