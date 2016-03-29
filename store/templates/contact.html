@@ -17,62 +17,15 @@
             <h2>Tiendas</h2>
         </div>
         <div>
-            <article>
-                <h3>We Are Soiux</h3>
-                <p>Colima 180, Colonia Roma, México D.F</p>
-                <p>siouxboutique@gmail.com</p>
-                <p>+52.5531.67.2041 </p>
-                <p>Notas</p>
-            </article>
-            <article>
-                <h3>We Are Soiux</h3>
-                <p>Colima 180, Colonia Roma, México D.F</p>
-                <p>siouxboutique@gmail.com</p>
-                <p>+52.5531.67.2041 </p>
-                <p>Notas</p>
-            </article>
-            <article>
-                <h3>We Are Soiux</h3>
-                <p>Colima 180, Colonia Roma, México D.F</p>
-                <p>siouxboutique@gmail.com</p>
-                <p>+52.5531.67.2041 </p>
-                <p>Notas</p>
-            </article>
-            <article>
-                <h3>We Are Soiux</h3>
-                <p>Colima 180, Colonia Roma, México D.F</p>
-                <p>siouxboutique@gmail.com</p>
-                <p>+52.5531.67.2041 </p>
-                <p>Notas</p>
-            </article>
-            <article>
-                <h3>We Are Soiux</h3>
-                <p>Colima 180, Colonia Roma, México D.F</p>
-                <p>siouxboutique@gmail.com</p>
-                <p>+52.5531.67.2041 </p>
-                <p>Notas</p>
-            </article>
-            <article>
-                <h3>We Are Soiux</h3>
-                <p>Colima 180, Colonia Roma, México D.F</p>
-                <p>siouxboutique@gmail.com</p>
-                <p>+52.5531.67.2041 </p>
-                <p>Notas</p>
-            </article>
-            <article>
-                <h3>We Are Soiux</h3>
-                <p>Colima 180, Colonia Roma, México D.F</p>
-                <p>siouxboutique@gmail.com</p>
-                <p>+52.5531.67.2041 </p>
-                <p>Notas</p>
-            </article>
-            <article>
-                <h3>We Are Soiux</h3>
-                <p>Colima 180, Colonia Roma, México D.F</p>
-                <p>siouxboutique@gmail.com</p>
-                <p>+52.5531.67.2041 </p>
-                <p>Notas</p>
-            </article>
+            {% for item in p_list%}
+                <article>
+                    <h3>{{item.name}}</h3>
+                    <p>{{item.adress}}</p>
+                    <p>{{item.mail}}</p>
+                    <p>{{item.phone}}</p>
+                    <p>{{item.notes}}</p>
+                </article>
+            {% endfor %}
         </div>
     </section>
 

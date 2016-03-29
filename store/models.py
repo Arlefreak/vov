@@ -300,3 +300,24 @@ class VideoPress(OrderedModel):
         return u'%s' % (self.video.url)
     def __str__(self):
         return u'%s' % (self.name)
+
+class Stores(OrderedModel):
+    publish = models.BooleanField('Publish', default=False)
+    slug = models.SlugField('Slug', unique=True, max_length=50, editable=False)
+    name = models.CharField('Name',default='', max_length=140)
+    adress = models.CharField('Adress',default='', max_length=500)
+    mail = models.EmailField('Email',default='')
+    phone = models.CharField('Phone',default='', max_length=140)
+    notes = models.CharField('Notes',default='', max_length=500)
+    date = models.DateField('Date added', auto_now_add=True)
+    class Meta:
+        ordering  = ['order', 'date', 'slug']
+        verbose_name = 'Store'
+        verbose_name_plural = 'Stores'
+    def __unicode__(self):
+        return u'%s' % (self.slug)
+    def __str__(self):
+        return u'%s' % (self.slug)
+    def save(self, *args, **kwargs):
+        self.slug = uuslug(self.name, instance=self, slug_field='slug')
+        super(Stores, self).save(**kwargs)

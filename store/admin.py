@@ -1,6 +1,6 @@
 from django.contrib import admin
 from ordered_model.admin import OrderedModelAdmin
-from .models import Product, Category, ProductImages, ProductVariant, Press, PressImage, VideoPress
+from .models import Product, Category, ProductImages, ProductVariant, Press, PressImage, VideoPress, Stores
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
@@ -91,6 +91,19 @@ class CategoryAdmin(OrderedModelAdmin, ImportExportModelAdmin):
     search_fields = ('name', 'sku',)
     resource_class = CategoryResource
 
+class StoresAdmin(OrderedModelAdmin):
+    list_display = (
+        'move_up_down_links',
+        'slug',
+        'publish',
+        'name',
+        'adress',
+        'mail',
+    )
+    list_display_links = ('slug', 'name', 'adress', 'mail')
+    list_editable= ('publish',)
+    search_fields = ('name', 'slug',)
+
 class AdressAdmin(admin.ModelAdmin):
     list_display = ('client', 'name', 'type', 'default', 'country', 'zipcode')
 
@@ -123,6 +136,7 @@ admin.site.register(Product, ProductAdmin)
 admin.site.register(ProductVariant, ProductVariantAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Press, PressAdmin)
+admin.site.register(Stores, StoresAdmin)
 # admin.site.register(Adress, AdressAdmin)
 # admin.site.register(Client, ClientAdmin)
 # admin.site.register(Order, OrderAdmin)
