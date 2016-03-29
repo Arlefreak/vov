@@ -8,6 +8,7 @@ from django.utils.translation   import ugettext_lazy as _
 from ordered_model.models       import OrderedModel
 from solo.models                import SingletonModel
 from embed_video.fields         import EmbedVideoField
+from ckeditor.fields            import RichTextField
 import os
 
 def upload_image_to(instance, filename):
@@ -241,8 +242,45 @@ class Transaction(models.Model):
     card        = models.CharField(_('Token'), max_length=50)
 
 class Store(SingletonModel):
-    description   = models.TextField('Description', default='')
-    name          = models.CharField('Name',default='', max_length=140)
+    name = models.CharField('Name',default='', max_length=140)
+    small_description = models.CharField('Small description', default='', max_length=140)
+    big_description = RichTextField('Description', default='')
+    mail = models.EmailField('Email',default='', blank=True)
+    phone = models.CharField('Phone',default='', max_length=140, blank=True)
+    instagram = models.CharField('Instagram', default='', max_length=140,blank=True)
+    facebook = models.URLField('Facebook', default='', blank=True)
+    twitter = models.URLField('Twitter', default='', blank=True)
+    class Meta:
+        verbose_name = 'VOV'
+        verbose_name_plural = 'VOV'
+    def __unicode__(self):
+        return u'%s' % (self.name)
+    def __str__(self):
+        return u'%s' % (self.name)
+
+class StoreImage(OrderedModel):
+    store = models.ForeignKey('Store')
+    name  = models.CharField('Name',default='', max_length=140)
+    image = models.ImageField('Image', upload_to=upload_image_to)
+    date  = models.DateField('Date added', auto_now_add=True)
+    updated = models.DateField('Date updated', auto_now=True)
+    class Meta:
+        ordering = ['order', 'date']
+        verbose_name = 'image'
+        verbose_name_plural = 'images'
+    def __unicode__(self):
+        return u'%s' % (self.image.url)
+    def __str__(self):
+        return u'%s' % (self.image.url)
+    def image_img(self):
+        if self.image:
+            return u'<img src="%s" style="width: 100px;'\
+                ' height: auto; display: block;"/>' % self.image.url
+        else:
+            return 'No Image'
+    image_img.short_description = 'image'
+    image_img.allow_tags = True
+
 
 class Press (OrderedModel):
     slug          = models.SlugField('Slug', unique=True, max_length=50, editable=False)

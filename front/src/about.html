@@ -1,25 +1,18 @@
 {% extends 'base.html' %}
 {% load static from staticfiles %}
 {% block content %}
+{% load solo_tags %}
+{% get_solo 'store.Store' as about %}
 <main class="wrapper">
     <div class="blueberry">
         <ul class="slides">
-            <li><img src="//cdn.shopify.com/s/files/1/0288/1370/files/01_large.jpg?3136" /></li>
-            <li><img src="//cdn.shopify.com/s/files/1/0288/1370/files/IMG_8415_large.JPG?5003" /></li>
-            <li><img src="//cdn.shopify.com/s/files/1/0288/1370/files/IMG_8434_large.JPG?5004" /></li>
-            <li><img src="//cdn.shopify.com/s/files/1/0288/1370/files/IMG_8442_large.JPG?5005" /></li>
+            {% for item in p_list %}
+            <li><img src="{{item.image.url}}" /></li>
+            {% endfor %}
         </ul>
     </div>
     <section class="info">
-        <p>
-            En vvvvovvvv –se pronuncia vov– ponemos el acento en la utilidad y la sencillez. Somos productores de accesorios únicos para hombres y mujeres que buscan utilidad y buen diseño, lo necesario para acompañar su rutina diaria.
-        </p>
-        <p>
-            Nuestras mochilas están hechas a mano en México DF bajo una rigurosa selección de los mejores materiales, entre pieles recicladas y otras telas. Cada una está debidamente identificada con un número de serie que te brinda la seguridad de que estás recibiendo una pieza única.
-        </p>
-        <p>
-            En vvvvovvvv nos apasiona poder compartir este proceso creativo de forma conjunta con nuestros clientes. A través de diseños modernos y sencillos, proyectamos en accesorios de gran utilidad un estilo de vida práctico y distinguido.
-        </p>
+        {{about.big_description | safe}}
     </section>
 </main>
 {% endblock %}

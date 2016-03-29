@@ -1,8 +1,9 @@
 from django.contrib import admin
 from ordered_model.admin import OrderedModelAdmin
-from .models import Product, Category, ProductImages, ProductVariant, Press, PressImage, VideoPress, Stores
+from .models import Product, Category, ProductImages, ProductVariant, Press, PressImage, VideoPress, Stores, Store, StoreImage
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
+from solo.admin import SingletonModelAdmin
 
 
 class ProductResource(resources.ModelResource):
@@ -24,6 +25,10 @@ class productVariantInline(admin.TabularInline):
 
 class productImagesInline(admin.TabularInline):
     model = ProductImages
+    extra = 0
+
+class storeImagesInline(admin.TabularInline):
+    model = StoreImage
     extra = 0
 
 class pressImageInline(admin.TabularInline):
@@ -104,6 +109,16 @@ class StoresAdmin(OrderedModelAdmin):
     list_editable= ('publish',)
     search_fields = ('name', 'slug',)
 
+class StoreAdmin(SingletonModelAdmin):
+    list_display = (
+        'name',
+        'small_description',
+        'mail',
+        'phone',
+    )
+    list_display_links = ('name', 'small_description', 'mail', 'phone')
+    inlines = [ storeImagesInline ]
+
 class AdressAdmin(admin.ModelAdmin):
     list_display = ('client', 'name', 'type', 'default', 'country', 'zipcode')
 
@@ -137,6 +152,7 @@ admin.site.register(ProductVariant, ProductVariantAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Press, PressAdmin)
 admin.site.register(Stores, StoresAdmin)
+admin.site.register(Store, StoreAdmin)
 # admin.site.register(Adress, AdressAdmin)
 # admin.site.register(Client, ClientAdmin)
 # admin.site.register(Order, OrderAdmin)

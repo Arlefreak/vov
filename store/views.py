@@ -1,4 +1,4 @@
-from store.models import Product, ProductImages, Category, ShoppingCartProduct, Order, Adress, ProductVariant, Press, Stores
+from store.models import Product, ProductImages, Category, ShoppingCartProduct, Order, Adress, ProductVariant, Press, Stores, StoreImage
 from store.serializers import ProductSerializer, ProductImageSerializer, CategorySerializer, \
     ShoppingCartProductSerializer, OrderSerializer, AdressSerializer, UserSerializer
 from rest_framework import permissions
@@ -70,7 +70,7 @@ def HomeView (request):
     return render(request, template_name, context)
 
 def AboutView(request):
-    p_list = ""
+    p_list = StoreImage.objects.all()
     single = ""
     title  = "vov - about"
     description = "store"

@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'ckeditor',
     'ordered_model',
     'import_export',
     'embed_video',
@@ -121,6 +122,11 @@ USE_L10N = True
 
 USE_TZ = True
 
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Basic',
+    },
+}
 
 STATIC_URL = '/static/'
 
