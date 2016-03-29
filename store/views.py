@@ -1,4 +1,4 @@
-from store.models import Product, ProductImages, Category, ShoppingCartProduct, Order, Adress, ProductVariant
+from store.models import Product, ProductImages, Category, ShoppingCartProduct, Order, Adress, ProductVariant, Press
 from store.serializers import ProductSerializer, ProductImageSerializer, CategorySerializer, \
     ShoppingCartProductSerializer, OrderSerializer, AdressSerializer, UserSerializer
 from rest_framework import permissions
@@ -109,7 +109,7 @@ def ProductsSingleView(request, category_name, product_name, variant_name):
     return render(request, template_name, context)
 
 def PressListView(request):
-    p_list = ""
+    p_list = Press.objects.order_by('order')
     single = ""
     title  = "vov - prensa"
     description = "store"

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from ordered_model.admin import OrderedModelAdmin
-from .models import Product, Adress, Client, Order, ShoppingCartProduct, Category, ProductImages, ProductVariant
+from .models import Product, Category, ProductImages, ProductVariant, Press, PressImage, VideoPress
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
@@ -26,6 +26,13 @@ class productImagesInline(admin.TabularInline):
     model = ProductImages
     extra = 0
 
+class pressImageInline(admin.TabularInline):
+    model = PressImage
+    extra = 0
+class pressVideoInline(admin.TabularInline):
+    model = VideoPress
+    extra = 0
+
 class ProductAdmin(OrderedModelAdmin, ImportExportModelAdmin):
     list_display = (
         'move_up_down_links',
@@ -43,6 +50,19 @@ class ProductAdmin(OrderedModelAdmin, ImportExportModelAdmin):
     list_filter = ('category',)
     search_fields = ('name', 'sku',)
     resource_class = ProductResource
+
+class PressAdmin(OrderedModelAdmin, ImportExportModelAdmin):
+    list_display = (
+        'move_up_down_links',
+        'publish',
+        'slug',
+        'title',
+        'date',
+    )
+    list_editable= ('publish', )
+    list_display_links = ('slug', 'title')
+    inlines = [ pressImageInline, pressVideoInline]
+    search_fields = ('title', 'slug',)
 
 class ProductVariantAdmin(OrderedModelAdmin, ImportExportModelAdmin):
     list_display = (
@@ -102,6 +122,7 @@ class ShoppingCartProductAdmin(admin.ModelAdmin):
 admin.site.register(Product, ProductAdmin)
 admin.site.register(ProductVariant, ProductVariantAdmin)
 admin.site.register(Category, CategoryAdmin)
+admin.site.register(Press, PressAdmin)
 # admin.site.register(Adress, AdressAdmin)
 # admin.site.register(Client, ClientAdmin)
 # admin.site.register(Order, OrderAdmin)

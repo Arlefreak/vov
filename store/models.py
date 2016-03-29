@@ -246,9 +246,9 @@ class Store(SingletonModel):
 
 class Press (OrderedModel):
     slug          = models.SlugField('Slug', unique=True, max_length=50, editable=False)
+    publish       = models.BooleanField('Publish', default=False)
     title         = models.CharField('Title',default='', max_length=140)
     text          = models.TextField('Text', default='', blank=True)
-    publish       = models.BooleanField('Publish', default=False)
     date          = models.DateField('Date added', auto_now_add=True)
     updated       = models.DateField('Date updated', auto_now=True)
     class Meta:
@@ -299,4 +299,4 @@ class VideoPress(OrderedModel):
     def __unicode__(self):
         return u'%s' % (self.video.url)
     def __str__(self):
-        return u'%s' % (self.video.url)
+        return u'%s' % (self.name)

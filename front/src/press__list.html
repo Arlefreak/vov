@@ -3,78 +3,18 @@
 {% block content %}
 <main class="wrapper">
     <ul class="press">
+        {% for item in p_list %}
         <li>
             <section class="press-info">
-                <h3>Press</h3>
-                <p>99/99/9999</p>
+                <h3>{{item.title}}</h3>
+                <p>{{item.date}}</p>
                 <a href="singlePress.html">(Ver artículo completo)</a>
             </section>
             <section class="press-content">
-                <p>
-                    "los backpacks y bolsos se han llevado a otro nivel completamente funcional; con el plus de que son sustentables y tienen un diseño increíble. Realizados con piel reciclada, estos bolsos se adaptan a todo: son transformables a tres tamaños distintos..." Aquí puedes ver el artículo completo.X
-                </p>
+                {{item.text}}
             </section>
         </li>
-        <li>
-            <section class="press-info">
-                <h3>Press</h3>
-                <p>99/99/9999</p>
-                <a href="singlePress.html">(Ver artículo completo)</a>
-            </section>
-            <section class="press-content">
-                <p>
-                    "los backpacks y bolsos se han llevado a otro nivel completamente funcional; con el plus de que son sustentables y tienen un diseño increíble. Realizados con piel reciclada, estos bolsos se adaptan a todo: son transformables a tres tamaños distintos..." Aquí puedes ver el artículo completo.X
-                </p>
-            </section>
-        </li>
-        <li>
-            <section class="press-info">
-                <h3>Press</h3>
-                <p>99/99/9999</p>
-                <a href="singlePress.html">(Ver artículo completo)</a>
-            </section>
-            <section class="press-content">
-                <p>
-                    "los backpacks y bolsos se han llevado a otro nivel completamente funcional; con el plus de que son sustentables y tienen un diseño increíble. Realizados con piel reciclada, estos bolsos se adaptan a todo: son transformables a tres tamaños distintos..." Aquí puedes ver el artículo completo.X
-                </p>
-            </section>
-        </li>
-        <li>
-            <section class="press-info">
-                <h3>Press</h3>
-                <p>99/99/9999</p>
-                <a href="singlePress.html">(Ver artículo completo)</a>
-            </section>
-            <section class="press-content">
-                <p>
-                    "los backpacks y bolsos se han llevado a otro nivel completamente funcional; con el plus de que son sustentables y tienen un diseño increíble. Realizados con piel reciclada, estos bolsos se adaptan a todo: son transformables a tres tamaños distintos..." Aquí puedes ver el artículo completo.X
-                </p>
-            </section>
-        </li>
-        <li>
-            <section class="press-info">
-                <h3>Press</h3>
-                <p>99/99/9999</p>
-                <a href="singlePress.html">(Ver artículo completo)</a>
-            </section>
-            <section class="press-content">
-                <p>
-                    "los backpacks y bolsos se han llevado a otro nivel completamente funcional; con el plus de que son sustentables y tienen un diseño increíble. Realizados con piel reciclada, estos bolsos se adaptan a todo: son transformables a tres tamaños distintos..." Aquí puedes ver el artículo completo.X
-                </p>
-            </section>
-        </li>
-        <li>
-            <section class="press-info">
-                <h3>Press</h3>
-                <p>99/99/9999</p>
-                <a href="singlePress.html">(Ver artículo completo)</a>
-            </section>
-            <section class="press-content">
-                <p>
-                    "los backpacks y bolsos se han llevado a otro nivel completamente funcional; con el plus de que son sustentables y tienen un diseño increíble. Realizados con piel reciclada, estos bolsos se adaptan a todo: son transformables a tres tamaños distintos..." Aquí puedes ver el artículo completo.X
-                </p>
-            </section>
-        </li>
+        {% endfor %}  
     </ul>
 </main>
 {% endblock %}
