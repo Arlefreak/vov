@@ -1,15 +1,17 @@
 {% extends 'base.html' %}
 {% load static from staticfiles %}
 {% block content %}
+{% load solo_tags %}
+{% get_solo 'store.Store' as contact %}
 <main class="wrapper">
     <section class="contact">
         <div>
             <h2>Contacto & Pedidos</h2>
         </div>
         <div>
-            <p>e. hola@vvvvovvvv.com</p>
-            <p>t. +52 1 (55)5 407 2866</p>
-            <p>instagram: @vovleathergoods</p>
+            <p>e. <a href="mailto:{{contact.mail}}">{{contact.mail}}</a></p>
+            <p>t. <a href="tel:{{contact.phone}}">{{contact.phone}}</a></p>
+            <p>instagram: <a href="https://www.instagram.com/{{contact.instagram}}">@{{contact.instagram}}</a></p>
         </div>
     </section>
     <section class="stores">
