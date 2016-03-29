@@ -94,8 +94,8 @@ class CategoryAdmin(OrderedModelAdmin, ImportExportModelAdmin):
 class StoresAdmin(OrderedModelAdmin):
     list_display = (
         'move_up_down_links',
-        'slug',
         'publish',
+        'slug',
         'name',
         'adress',
         'mail',

@@ -109,7 +109,7 @@ def ProductsSingleView(request, category_name, product_name, variant_name):
     return render(request, template_name, context)
 
 def PressListView(request):
-    p_list = Press.objects.order_by('order')
+    p_list = Press.objects.order_by('order').filter(publish=True)
     single = ""
     title  = "vov - prensa"
     description = "store"
@@ -127,7 +127,7 @@ def PressSingleView(request):
     return render(request, template_name, context)
 
 def ContactView(request):
-    p_list = Stores.objects.order_by('order')
+    p_list = Stores.objects.order_by('order').filter(publish=True)
     single = ""
     title  = "vov"
     description = "store - contacto"

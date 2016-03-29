@@ -305,11 +305,11 @@ class Stores(OrderedModel):
     publish = models.BooleanField('Publish', default=False)
     slug = models.SlugField('Slug', unique=True, max_length=50, editable=False)
     name = models.CharField('Name',default='', max_length=140)
-    adress = models.CharField('Adress',default='', max_length=500)
-    mail = models.EmailField('Email',default='')
-    phone = models.CharField('Phone',default='', max_length=140)
-    notes = models.CharField('Notes',default='', max_length=500)
-    date = models.DateField('Date added', auto_now_add=True)
+    adress = models.CharField('Adress',default='', max_length=500, blank=True)
+    mail = models.EmailField('Email',default='', blank=True)
+    phone = models.CharField('Phone',default='', max_length=140, blank=True)
+    notes = models.CharField('Notes',default='', max_length=500, blank=True)
+    date = models.DateField('Date added', auto_now_add=True, blank=True)
     class Meta:
         ordering  = ['order', 'date', 'slug']
         verbose_name = 'Store'
