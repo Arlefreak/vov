@@ -260,7 +260,7 @@ class Press (OrderedModel):
     def __str__(self):
         return u'%s' % (self.slug)
     def save(self, *args, **kwargs):
-        self.slug = uuslug(self.slug, instance=self, slug_field='slug')
+        self.slug = uuslug(self.title, instance=self, slug_field='slug')
         super(Press, self).save(**kwargs)
 
 class PressImage(OrderedModel):
