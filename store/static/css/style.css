@@ -522,9 +522,25 @@ a {
 .catalog li {
   display: block;
   float: left;
-  width: 20%;
+  width: 21.2%;
   margin: 0 2.5% 20px 2.5%;
   text-align: center;
+}
+.catalog li:nth-child(4n-7) {
+  margin: 0 2.5% 20px 0;
+}
+@media screen and (max-width: 768px) {
+  .catalog li:nth-child(4n-7) {
+    margin: 0 2.5% 20px 2.5%;
+  }
+}
+.catalog li:nth-child(4n) {
+  margin: 0 0 20px 2.5%;
+}
+@media screen and (max-width: 768px) {
+  .catalog li:nth-child(4n) {
+    margin: 0 2.5% 20px 2.5%;
+  }
 }
 @media screen and (max-width: 768px) {
   .catalog li {
