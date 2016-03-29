@@ -1,7 +1,9 @@
 {% load static from staticfiles %}
 <header>
     <div class="wrapper">
-        <img src="{% static "img/logo-header.svg" %}" alt="logo" class="logo">
+        <a href="{% url 'home' %}">
+            <img src="{% static "img/logo-header.svg" %}" alt="logo" class="logo">
+        </a>
         <nav>
             <ul>
                 {% for page in menu %}

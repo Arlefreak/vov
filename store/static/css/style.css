@@ -374,6 +374,7 @@ header nav {
 header nav li {
   display: inline-block;
   margin: 0 1% 0 1%;
+  font-size: 1.2em;
 }
 @media screen and (max-width: 768px) {
   header nav li {
