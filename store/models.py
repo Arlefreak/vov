@@ -115,6 +115,7 @@ class ProductImages(OrderedModel):
 class Category(OrderedModel):
     sku           = models.SlugField('SKU', unique=True, max_length=50, editable=False)
     name         = models.CharField('Name',default='', max_length=140)
+    description   = models.TextField('Description', default='', blank=True)
     image        = models.ImageField('Image', upload_to=upload_image_to, blank=True, null=True)
     date         = models.DateField('Date added', auto_now_add=True)
     updated      = models.DateField('Date updated', auto_now=True)
@@ -280,7 +281,6 @@ class StoreImage(OrderedModel):
             return 'No Image'
     image_img.short_description = 'image'
     image_img.allow_tags = True
-
 
 class Press (OrderedModel):
     slug          = models.SlugField('Slug', unique=True, max_length=50, editable=False)
