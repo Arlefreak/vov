@@ -3,7 +3,9 @@
 {% block content %}
 <main class="wrapper">
     <section class="main-image">
-        <img src="{{ single.image.url }}" alt="{{ single.name }}"/>
+        {% if single.image %}
+            <img src="{{ single.image.url }}" alt="{{ single.name }}"/>
+        {% endif %}
     </section>
     <section class="item-info">
         <h2>{{ single.name }}</h2>
