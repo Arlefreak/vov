@@ -147,8 +147,32 @@ class OrderAdmin(admin.ModelAdmin):
 class ShoppingCartProductAdmin(admin.ModelAdmin):
     list_display = ('client', 'product', 'cuantity')
 
+class ProductImageAdmin(OrderedModelAdmin):
+    list_display = (
+        'move_up_down_links',
+        'order',
+        'name',
+        'product',
+        'image_img',
+    )
+    list_display_links = (
+        'order',
+        'name',
+        'product',
+    )
+    list_filter = (
+        'product__product',
+        'product',
+    )
+    search_fields = (
+        'name',
+        'product',
+    )
+
+
 admin.site.register(Product, ProductAdmin)
 admin.site.register(ProductVariant, ProductVariantAdmin)
+admin.site.register(ProductImages, ProductImageAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Press, PressAdmin)
 admin.site.register(Stores, StoresAdmin)

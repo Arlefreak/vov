@@ -74,6 +74,11 @@ class ProductVariant(OrderedModel):
     inventory     = models.IntegerField('Inventory', default=0)
     date          = models.DateField('Date added', auto_now_add=True)
     updated       = models.DateField('Date updated', auto_now=True)
+    def __unicode__(self):
+        return u'%s' % (self.name)
+    def __str__(self):
+        return u'%s' % (self.name)
+
     def save(self, *args, **kwargs):
         self.sku = uuslug(self.name, instance=self, slug_field='sku')
         super(ProductVariant, self).save(**kwargs)
@@ -103,6 +108,7 @@ class ProductImages(OrderedModel):
     image         = models.ImageField('Image', upload_to=upload_image_to)
     date         = models.DateField('Date added', auto_now_add=True)
     updated      = models.DateField('Date updated', auto_now=True)
+    order_with_respect_to = 'product'
     class Meta:
         ordering = ['order', 'date']
         verbose_name = 'image'
@@ -112,6 +118,16 @@ class ProductImages(OrderedModel):
     def __str__(self):
         return u'%s' % (self.image.url)
 
+    def image_img(self):
+        if self.image:
+            return u'<a href="{0}" target="_blank">\
+                        <img src="{0}" \
+                        style="width: 100px; height: auto; display: block;"/>\
+                </a>'.format(self.image.url)
+        else:
+            return 'No Image'
+    image_img.short_description = 'image'
+    image_img.allow_tags = True
 class Category(OrderedModel):
     sku           = models.SlugField('SKU', unique=True, max_length=50, editable=False)
     name         = models.CharField('Name',default='', max_length=140)
