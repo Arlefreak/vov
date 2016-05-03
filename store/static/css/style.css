@@ -665,6 +665,11 @@ main {
   background-position-y: 15vh;
   background-attachment: fixed;
 }
+.parallax img {
+  height: 50%;
+  width: auto;
+  display: block;
+}
 .press {
   width: 100%;
 }
