@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 {% load static from staticfiles %}
+{% block references %}
+    <link href="{% static "lib/css/lightbox.css" %}" rel="stylesheet" type="text/css"  media="all"  />
+{% endblock %}
 {% block content %}
 <main class="wrapper">
     <section class="main-image">
@@ -21,11 +24,17 @@
     <ul class="catalog">
         {% for item in p_list %}
             <li>
+                <a href="{{item.image.url}}" data-lightbox="{{item.image.name}}" data-title="vov">
                 <div
                     style="background-image: url('{{item.image.url}}')"
                     ></div>
+                </a>
             </li>
         {% endfor %}
     </ul>
 </main>
+{% endblock %}
+{% block FooterReferences %}
+<script src="{% static "lib/js/jquery.js"%}"></script>
+<script src="{% static "lib/js/lightbox.js"%}"></script>
 {% endblock %}

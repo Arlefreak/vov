@@ -29,10 +29,19 @@ gulp.task('bower', function() {
     var jsFilter = gulpFilter('**/*.js', {
         restore: true
     });
-    var cssFilter = gulpFilter('*.css', {
+    var cssFilter = gulpFilter('**/*.css', {
         restore: true
     });
     var fontFilter = gulpFilter(['*.eot', '*.woff', '*.svg', '*.ttf']);
+    var imgFilter = gulpFilter([
+        '**/*.png',
+        '**/*.jpg',
+        '**/*.jpeg',
+        '**/*.gif',
+        '**/*.svg',
+    ], {
+        restore: true
+    });
     var destPath = staticDir + 'lib';
 
     return gulp.src(bower({
@@ -53,18 +62,18 @@ gulp.task('bower', function() {
 
     // grab vendor css files from bower_components, minify and push in /public
     .pipe(cssFilter)
-    .pipe(gulp.dest(destPath + '/css'))
-    // .pipe(minifycss())
-    .pipe(rename({
-        suffix: '.min'
-    }))
-    .pipe(gulp.dest(destPath + '/css'))
+    .pipe(gulp.dest(destPath + '/css/'))
+    .pipe(cssFilter.restore)
+
+    // grab vendor img files from bower_components, minify and push in /public
+    .pipe(imgFilter)
+    .pipe(gulp.dest(destPath + '/images/'))
     .pipe(cssFilter.restore)
 
     // grab vendor font files from bower_components and push in /public
     .pipe(fontFilter)
     .pipe(flatten())
-    .pipe(gulp.dest(destPath + '/fonts'));
+    .pipe(gulp.dest(destPath + '/fonts/'));
 });
 
 gulp.task('browserify', function() {
