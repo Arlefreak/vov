@@ -584,9 +584,13 @@ a {
   margin: 0 auto 20px auto;
 }
 .main-image img {
+  width: 100%;
   max-width: 100%;
   display: block;
   margin: auto;
+}
+.main-image img.category {
+  max-width: 300px;
 }
 .item-info {
   border: 1px solid #000;
