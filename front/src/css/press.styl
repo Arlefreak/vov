@@ -1,5 +1,7 @@
 .press
+.press-single
     width 100%
+    margin 0 auto 100px auto
     li
         display flex
         width 100%
@@ -10,6 +12,8 @@
             width 100%
         &:firs-child
             padding 0 0 20px 0
+        &:last-child
+            border none
         h3
             color $color3
         a
@@ -37,3 +41,18 @@
                 display block
                 margin 10px auto 10px
                 width 100%
+.press-single
+    header
+        border none
+    .videos
+        margin 50px auto 0 auto
+        iframe
+            width 100%
+            margin 50px auto 0 auto
+    .gallery
+        margin 50px auto 0 auto
+        img
+            margin 25px auto 0 auto
+            display block
+            width 100%
+            height auto

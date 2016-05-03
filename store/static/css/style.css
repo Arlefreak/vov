@@ -675,10 +675,13 @@ main {
   width: auto;
   display: block;
 }
-.press {
+.press,
+.press-single {
   width: 100%;
+  margin: 0 auto 100px auto;
 }
-.press li {
+.press li,
+.press-single li {
   display: -webkit-box;
   display: -moz-box;
   display: -webkit-flex;
@@ -690,18 +693,26 @@ main {
   padding: 20px 0 20px 0;
 }
 @media screen and (max-width: 768px) {
-  .press li {
+  .press li,
+  .press-single li {
     display: block;
     width: 100%;
   }
 }
-.press li:firs-child {
+.press li:firs-child,
+.press-single li:firs-child {
   padding: 0 0 20px 0;
 }
-.press li h3 {
+.press li:last-child,
+.press-single li:last-child {
+  border: none;
+}
+.press li h3,
+.press-single li h3 {
   color: #17ce4b;
 }
-.press li a {
+.press li a,
+.press-single li a {
   color: #000;
   -webkit-transition: color 0.5s ease;
   -moz-transition: color 0.5s ease;
@@ -709,10 +720,12 @@ main {
   -ms-transition: color 0.5s ease;
   transition: color 0.5s ease;
 }
-.press li a:hover {
+.press li a:hover,
+.press-single li a:hover {
   color: #17ce4b;
 }
-.press li section {
+.press li section,
+.press-single li section {
   margin: 0;
   display: -webkit-box;
   display: -moz-box;
@@ -734,31 +747,56 @@ main {
   flex-direction: column;
   text-align: left;
 }
-.press li section:first-child {
+.press li section:first-child,
+.press-single li section:first-child {
   width: 30%;
 }
 @media screen and (max-width: 768px) {
-  .press li section:first-child {
+  .press li section:first-child,
+  .press-single li section:first-child {
     width: 100%;
   }
 }
-.press li section:last-child {
+.press li section:last-child,
+.press-single li section:last-child {
   width: 70%;
 }
 @media screen and (max-width: 768px) {
-  .press li section:last-child {
+  .press li section:last-child,
+  .press-single li section:last-child {
     width: 100%;
   }
 }
 @media screen and (max-width: 768px) {
-  .press li section {
+  .press li section,
+  .press-single li section {
     display: block;
   }
 }
-.press li section p {
+.press li section p,
+.press-single li section p {
   display: block;
   margin: 10px auto 10px;
   width: 100%;
+}
+.press-single header {
+  border: none;
+}
+.press-single .videos {
+  margin: 50px auto 0 auto;
+}
+.press-single .videos iframe {
+  width: 100%;
+  margin: 50px auto 0 auto;
+}
+.press-single .gallery {
+  margin: 50px auto 0 auto;
+}
+.press-single .gallery img {
+  margin: 25px auto 0 auto;
+  display: block;
+  width: 100%;
+  height: auto;
 }
 .contact,
 .stores {

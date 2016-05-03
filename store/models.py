@@ -316,6 +316,12 @@ class Press (OrderedModel):
     def save(self, *args, **kwargs):
         self.slug = uuslug(self.title, instance=self, slug_field='slug')
         super(Press, self).save(**kwargs)
+    def gallery(self):
+        gal = PressImage.objects.filter(press=self)
+        return gal
+    def videos(self):
+        vids =  VideoPress.objects.filter(press=self)
+        return vids
 
 class PressImage(OrderedModel):
     press      = models.ForeignKey('Press')

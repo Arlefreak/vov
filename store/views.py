@@ -120,14 +120,17 @@ def PressListView(request):
     context = {'p_list': p_list, 'single': single, 'title': title, 'description': description, 'footer': footer}
     return render(request, template_name, context)
 
-def PressSingleView(request):
-    p_list = ""
-    single = ""
+def PressSingleView(request, press_name):
+    p_list = get_object_or_404(Press, slug=press_name)
+    p_list = p_list.gallery
+    videos = get_object_or_404(Press, slug=press_name)
+    videos = videos.videos
+    single = get_object_or_404(Press, slug=press_name)
     footer = ProductImages.objects.order_by('?').first()
     title  = "vov - prensa"
     description = "store"
     template_name = "press__single.html"
-    context = {'p_list': p_list, 'single': single, 'title': title, 'description': description, 'footer': footer}
+    context = {'p_list': p_list, 'single': single, 'title': title, 'description': description, 'footer': footer, 'videos': videos}
     return render(request, template_name, context)
 
 def ContactView(request):

@@ -6,15 +6,15 @@
         {% for item in p_list %}
         <li>
             <section class="press-info">
-                <h3>{{item.title}}</h3>
-                <p>{{item.date}}</p>
-                <a href="singlePress.html">(Ver artículo completo)</a>
+                <a href="{% url 'press_single' item.slug %}"><h3>{{item.title}}</h3></a>
+                <a href="{% url 'press_single' item.slug %}"><p>{{item.date}}</p></a>
+                <a href="{% url 'press_single' item.slug %}">(Ver artículo completo)</a>
             </section>
             <section class="press-content">
                 {{item.text}}
             </section>
         </li>
-        {% endfor %}  
+        {% endfor %}
     </ul>
 </main>
 {% endblock %}

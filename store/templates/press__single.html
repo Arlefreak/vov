@@ -1,20 +1,31 @@
 {% extends 'base.html' %}
 {% load static from staticfiles %}
+{% load embed_video_tags %}
 {% block content %}
-<div class="container apush">
-    <div class="grid_1">
-        <p class="article-title">Casa Bosques x vvvvovvvv</p>
-        <time pubdate datetime="18/06/2014">18/06/2014</time>
+<main class="wrapper">
+    <div class="press-single">
+        <header>
+            <h2 class="article-title">{{single.title}}</h2>
+            <span>{{single.date|date:"d-m-y"}}</span>
+        </header>
+        <section>
+            {{single.text}}
+        </section>
+        <section class="gallery">
+            {% for item in p_list %}
+            <img src="{{item.image.url}}"/>
+            {% endfor %}
+        </video>
+        <section class="videos">
+            {% for item in videos %}
+                {% video item.video %}
+            {% endfor %}
+        </video>
     </div>
-    <div class="grid_2">
-        <iframe src="//player.vimeo.com/video/55124671" webkitallowfullscreen="webkitallowfullscreen" mozallowfullscreen="mozallowfullscreen" allowfullscreen="allowfullscreen" frameborder="0" height="422" width="750"></iframe>
-        <p><a href="http://vimeo.com/55124671">PORTAPASAPORTE + CHOCOLATE EDICIÓN ESPECIAL. CHILE PASILLA</a> from <a href="http://vimeo.com/casabosques">Casa Bosques</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
-    </div>
-    <div class="grid_2 push_1">
-    </div>
-    <p class="clearfix"> 
-        <span class="left"><a href="/blogs/prensa/14527801-hecho-en-mexico-hola" title="">&larr; Next Post</a></span>
-        <span class="right"><a href="/blogs/prensa/14527801-hecho-en-mexico-hola" title="">Previous Post &rarr;</a></span>
-    </p>
-</div>
+</main>
+{% endblock %}
+{% block footer %}
+<section class="center-both-parent parallax" style="background-image: url('{{footer}}')">
+        <img class="logo center-both-child" src="{% static "img/logo.svg"%}" alt="logo">
+</section>
 {% endblock %}
