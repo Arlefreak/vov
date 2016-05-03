@@ -16,6 +16,11 @@
     </section>
 </main>
 {% endblock %}
+{% block footer %}
+<section class="center-both-parent parallax" style="background-image: url('{{footer}}')">
+        <img class="logo center-both-child" src="{% static "img/logo.svg"%}" alt="logo">
+</section>
+{% endblock %}
 {% block FooterReferences %}
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
     <script type="text/javascript" src="{% static "js/jquery.blueberry.js"%}"></script>

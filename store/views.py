@@ -72,19 +72,21 @@ def HomeView (request):
 def AboutView(request):
     p_list = StoreImage.objects.all()
     single = ""
+    footer = ProductImages.objects.order_by('?').first()
     title  = "About"
     description = "store"
     template_name = "about.html"
-    context = {'p_list': p_list, 'single': single, 'title': title, 'description': description}
+    context = {'p_list': p_list, 'single': single, 'title': title, 'description': description, 'footer': footer}
     return render(request, template_name, context)
 
 def CategoryListView(request):
     p_list = Category.objects.order_by('order')
     single = ""
+    footer = ProductImages.objects.order_by('?').first()
     title  = "Catalog"
     description = "store"
     template_name = "category__list.html"
-    context = {'p_list': p_list, 'single': single, 'title': title, 'description': description}
+    context = {'p_list': p_list, 'single': single, 'title': title, 'description': description, 'footer': footer}
     return render(request, template_name, context)
 
 def ProductsListView(request, category_name):
@@ -111,26 +113,29 @@ def ProductsSingleView(request, category_name, product_name, variant_name):
 def PressListView(request):
     p_list = Press.objects.order_by('order').filter(publish=True)
     single = ""
+    footer = ProductImages.objects.order_by('?').first()
     title  = "Prensa"
     description = "store"
     template_name = "press__list.html"
-    context = {'p_list': p_list, 'single': single, 'title': title, 'description': description}
+    context = {'p_list': p_list, 'single': single, 'title': title, 'description': description, 'footer': footer}
     return render(request, template_name, context)
 
 def PressSingleView(request):
     p_list = ""
     single = ""
+    footer = ProductImages.objects.order_by('?').first()
     title  = "vov - prensa"
     description = "store"
     template_name = "press__single.html"
-    context = {'p_list': p_list, 'single': single, 'title': title, 'description': description}
+    context = {'p_list': p_list, 'single': single, 'title': title, 'description': description, 'footer': footer}
     return render(request, template_name, context)
 
 def ContactView(request):
     p_list = Stores.objects.order_by('order').filter(publish=True)
     single = ""
+    footer = ProductImages.objects.order_by('?').first()
     title  = "Contact"
     description = "Contact"
     template_name = "contact.html"
-    context = {'p_list': p_list, 'single': single, 'title': title, 'description': description}
+    context = {'p_list': p_list, 'single': single, 'title': title, 'description': description, 'footer': footer}
     return render(request, template_name, context)
