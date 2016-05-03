@@ -466,6 +466,9 @@ a {
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
+main {
+  overflow: hidden;
+}
 .blueberry {
   margin: 0 auto;
 }
@@ -649,6 +652,18 @@ a {
 }
 .price {
   color: #17ce4b;
+}
+.parallax {
+  width: 100%;
+  height: 50vh;
+  display: block;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: 15vh;
+  background-attachment: fixed;
 }
 .press {
   width: 100%;
