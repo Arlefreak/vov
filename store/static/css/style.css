@@ -665,6 +665,11 @@ main {
   background-position-y: 15vh;
   background-attachment: fixed;
 }
+@media screen and (max-width: 768px) {
+  .parallax {
+    background-position-y: center;
+  }
+}
 .parallax img {
   height: 50%;
   width: auto;
