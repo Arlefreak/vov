@@ -905,6 +905,7 @@ main {
 .home nav li {
   display: inline-block;
   margin: 0 10px 0 10px;
+  font-size: 1.5em;
 }
 @media screen and (max-width: 768px) {
   .home nav li {
