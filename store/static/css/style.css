@@ -237,6 +237,30 @@ textarea {
   -webkit-border-radius: 40px 0 0 40px;
   background: $black;
 }
+@font-face {
+  font-family: Georgia;
+  font-style: normal;
+  font-weight: normal;
+  src: url("../font/GeorgiaRegular.ttf");
+}
+@font-face {
+  font-family: Georgia;
+  font-style: italic;
+  font-weight: normal;
+  src: url("../font/GeorgiaItalic.ttf");
+}
+@font-face {
+  font-family: Georgia;
+  font-style: normal;
+  font-weight: bold;
+  src: url("../font/GeorgiaBold.ttf");
+}
+@font-face {
+  font-family: Georgia;
+  font-style: italic;
+  font-weight: bold;
+  src: url("../font/GeorgiaItalicBold.ttf");
+}
 html,
 body,
 div,
@@ -334,7 +358,7 @@ body {
   padding: 0;
   color: #000;
   background: #fff;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Georgia', serif;
 }
 header {
   width: 100%;

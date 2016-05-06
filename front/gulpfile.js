@@ -132,6 +132,12 @@ gulp.task('html', function() {
     .pipe(connect.reload());
 });
 
+gulp.task('font', function() {
+    gulp.src('./src/font/*')
+    .pipe(gulp.dest(staticDir + 'font'))
+    .pipe(connect.reload());
+});
+
 gulp.task('files', function() {
     gulp.src(['./src/**.*', '!./src/**.*.html', '!./src/**.*js', '!./src/img/'])
     .pipe(gulp.dest(templatesDir));
@@ -148,7 +154,7 @@ gulp.task('connect', function() {
     });
 });
 
-gulp.task('init', ['css', 'bower', 'react', 'img', 'html', 'files']);
+gulp.task('init', ['css', 'bower', 'react', 'img', 'html', 'files', 'font']);
 
 gulp.task('watch', ['css', 'react', 'img', 'html', 'connect'], function() {
     gulp.watch('src/css/**/*.styl', ['css']);
@@ -156,6 +162,7 @@ gulp.task('watch', ['css', 'react', 'img', 'html', 'connect'], function() {
     gulp.watch('src/js/**/*.jsx', ['react']);
     gulp.watch('src/img/**/*', ['img']);
     gulp.watch('src/*.html', ['html']);
+    gulp.watch('src/font/*', ['font']);
 });
 
 gulp.task('default', function() {
