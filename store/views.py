@@ -80,13 +80,21 @@ def AboutView(request):
     return render(request, template_name, context)
 
 def CategoryListView(request):
-    p_list = Category.objects.order_by('order')
+    p_list = Category.objects.order_by('order').filter(publish=True)
     single = ""
     footer = ProductImages.objects.order_by('?').first()
     title  = "Catalog"
     description = "store"
     template_name = "category__list.html"
     context = {'p_list': p_list, 'single': single, 'title': title, 'description': description, 'footer': footer}
+    return render(request, template_name, context)
+def ColaboracionesView(request):
+    p_list = Product.objects.filter(category__sku='colaboraciones')
+    single = get_object_or_404(Category, sku='colaboraciones')
+    title  = single.name
+    description = single.description
+    template_name = "colabs__list.html"
+    context = {'p_list': p_list, 'single': single, 'title': title, 'description': description}
     return render(request, template_name, context)
 
 def ProductsListView(request, category_name):

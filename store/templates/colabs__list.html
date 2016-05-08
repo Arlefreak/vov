@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% block content %}
+<main class="colabs">
+    {% for item in p_list %}
+    <article class="center-both-parent" style="background-image: url('{{item.image.url}}');">
+        <div class="center-both-child">
+            <a class="" href="{% url 'home' %}">
+                <img class="logo" src="{% static "img/vvvvovvvvWhite.svg"%}" alt="logo">
+                <span>+</span>
+                <h2>{{ item.name }}</h2>
+            </a>
+        </div>
+    </article>
+    {% endfor %}
+    </main>
+{% endblock %}
+{% block footer %}{% endblock %}

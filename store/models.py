@@ -129,7 +129,8 @@ class ProductImages(OrderedModel):
     image_img.short_description = 'image'
     image_img.allow_tags = True
 class Category(OrderedModel):
-    sku           = models.SlugField('SKU', unique=True, max_length=50, editable=False)
+    sku          = models.SlugField('SKU', unique=True, max_length=50, editable=False)
+    publish      = models.BooleanField('Publish', default=False)
     name         = models.CharField('Name',default='', max_length=140)
     description   = models.TextField('Description', default='', blank=True)
     image        = models.ImageField('Image', upload_to=upload_image_to, blank=True, null=True)

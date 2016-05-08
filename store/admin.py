@@ -88,11 +88,13 @@ class ProductVariantAdmin(OrderedModelAdmin, ImportExportModelAdmin):
 class CategoryAdmin(OrderedModelAdmin, ImportExportModelAdmin):
     list_display = (
         'move_up_down_links',
+        'publish',
         'sku',
         'name',
         'image_img',
     )
     list_display_links = ('sku', 'name', 'image_img')
+    list_editable = ('publish',)
     search_fields = ('name', 'sku',)
     resource_class = CategoryResource
 
