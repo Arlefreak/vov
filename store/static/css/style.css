@@ -494,6 +494,9 @@ main {
   overflow: hidden;
   margin: 30px auto auto auto;
 }
+main.wrapper {
+  margin: 30px auto auto auto;
+}
 .blueberry {
   margin: 0 auto;
 }
