@@ -7,7 +7,7 @@ from rest_framework import filters
 from taggit.models import Tag
 from taggit_serializer.serializers import TaggitSerializer
 # from django.views.generic import TemplateView
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.models import User
 
 class ProductViewSet(viewsets.ModelViewSet):
@@ -104,12 +104,15 @@ def ProductsListView(request, category_name):
     single = get_object_or_404(Category, sku=category_name)
     title  = single.name
     description = single.description
+    if(len(p_list) <= 1):
+        return redirect('product', category_name=single.sku, product_name=p_list[0].product.sku, variant_name=p_list[0].sku)
     template_name = "products__list.html"
     context = {'p_list': p_list, 'single': single, 'title': title, 'description': description}
     return render(request, template_name, context)
 
 def ProductsSingleView(request, category_name, product_name, variant_name):
-    p_list = get_object_or_404(ProductVariant, sku=variant_name)
+    # p_list = get_object_or_404(Product, sku=product_name, category__sky=category_name)
+    p_list = get_object_or_404(ProductVariant, sku=variant_name, product__sku=product_name)
     p_list = p_list.gallery
     single = get_object_or_404(Product, sku=product_name)
     title  = single.name
