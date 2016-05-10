@@ -14,13 +14,6 @@
             <p>${{ single.price }}</p>
         </div>
     </section>
-    <section class="main-image">
-        {% if single.image %}
-            <img src="{{ single.image.url }}" alt="{{ single.name }}"/>
-        {% else %}
-            <img src="{{ p_list.0.image.url }}" alt="{{ p_list.0.name }}"/>
-        {% endif %}
-    </section>
     {% for item in p_list %}
     <section class="main-image">
             <img src="{{ item.image.url }}" alt="{{ item.name }}"/>
