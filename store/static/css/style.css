@@ -648,9 +648,9 @@ main.wrapper {
     display: block;
   }
 }
-.item-info h2,
-.item-info p {
-  width: 50%;
+.item-info h2.flex,
+.item-info p.flex,
+.item-info div.flex {
   margin: 0;
   display: -webkit-box;
   display: -moz-box;
@@ -672,11 +672,21 @@ main.wrapper {
   flex-direction: column;
 }
 @media screen and (max-width: 768px) {
-  .item-info h2,
-  .item-info p {
+  .item-info h2.flex,
+  .item-info p.flex,
+  .item-info div.flex {
     width: 100%;
     margin: 20px auto 20px auto;
   }
+}
+.item-info div {
+  width: 15%;
+}
+.item-info h2.flex {
+  width: 40%;
+}
+.item-info p.flex {
+  width: 45%;
 }
 .price {
   color: #17ce4b;
