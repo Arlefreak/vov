@@ -88,12 +88,22 @@ def CategoryListView(request):
     template_name = "category__list.html"
     context = {'p_list': p_list, 'single': single, 'title': title, 'description': description, 'footer': footer}
     return render(request, template_name, context)
+
 def ColaboracionesView(request):
     p_list = Product.objects.filter(category__sku='colaboraciones')
     single = get_object_or_404(Category, sku='colaboraciones')
     title  = single.name
     description = single.description
     template_name = "colabs__list.html"
+    context = {'p_list': p_list, 'single': single, 'title': title, 'description': description}
+    return render(request, template_name, context)
+
+def ColaboracionesSingleView(request, category_name, product_name):
+    single = get_object_or_404(Product, sku=product_name)
+    p_list = ProductVariant.objects.filter(product__sku=product_name)
+    title  = single.name
+    description = single.description
+    template_name = "colabs__single.html"
     context = {'p_list': p_list, 'single': single, 'title': title, 'description': description}
     return render(request, template_name, context)
 

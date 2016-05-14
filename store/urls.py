@@ -19,6 +19,7 @@ urlpatterns = [
     url(r'^about/$', views.AboutView, name='about'),
     url(r'^productos/$', views.CategoryListView, name='categories'),
     url(r'^productos/(?P<category_name>[\w-]+)/$', views.ProductsListView, name='products'),
+    url(r'^productos/(?P<category_name>[\w-]+)/(?P<product_name>[\w-]+)/$$', views.ColaboracionesSingleView, name='productSingle'),
     url(r'^productos/(?P<category_name>[\w-]+)/(?P<product_name>[\w-]+)/(?P<variant_name>[\w-]+)/$', views.ProductsSingleView, name='product'),
     url(r'^colabs/$', views.ColaboracionesView, name='colabs'),
     url(r'^prensa/$', views.PressListView, name='press'),

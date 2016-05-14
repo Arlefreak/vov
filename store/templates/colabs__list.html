@@ -5,7 +5,7 @@
     {% for item in p_list %}
     <article class="center-both-parent" style="background-image: url('{{item.image.url}}');">
         <div class="center-both-child">
-            <a href="{% url 'product' single.sku item.sku item.variants.0.sku %}">
+            <a href="{% url 'productSingle' single.sku item.sku %}">
                 <img class="logo" src="{% static "img/vvvvovvvvWhite.svg"%}" alt="logo">
                 <span>+</span>
                 <h2>{{ item.name }}</h2>
