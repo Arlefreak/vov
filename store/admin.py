@@ -62,9 +62,10 @@ class PressAdmin(OrderedModelAdmin, ImportExportModelAdmin):
         'publish',
         'slug',
         'title',
+        'date_article',
         'date',
     )
-    list_editable= ('publish', )
+    list_editable= ('publish', 'date_article')
     list_display_links = ('slug', 'title')
     inlines = [ pressImageInline, pressVideoInline]
     search_fields = ('title', 'slug',)

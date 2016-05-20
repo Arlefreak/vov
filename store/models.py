@@ -314,10 +314,11 @@ class Press (OrderedModel):
     publish       = models.BooleanField('Publish', default=False)
     title         = models.CharField('Title',default='', max_length=140)
     text          = models.TextField('Text', default='', blank=True)
+    date_article  = models.DateField('Date article')
     date          = models.DateField('Date added', auto_now_add=True)
     updated       = models.DateField('Date updated', auto_now=True)
     class Meta:
-        ordering  = ['order', 'date', 'slug']
+        ordering  = ['order', 'date_article', 'slug']
         verbose_name = 'press'
         verbose_name_plural = 'press items'
     def __unicode__(self):
