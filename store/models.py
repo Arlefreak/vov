@@ -74,9 +74,6 @@ class Product (OrderedModel):
         else:
             return 'No Variants'
 
-    image_img.short_description = 'image'
-    image_img.allow_tags = True
-
 class ProductVariant(OrderedModel):
     product      = models.ForeignKey('Product')
     name         = models.CharField('Name',default='', max_length=140)
