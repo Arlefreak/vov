@@ -32,7 +32,7 @@
         <meta name="msapplication-square310x310logo" content="{% static "img/mstile-310x310.png"%}" />
 
         <meta property="og:title" content="VOV. Diseños en piel hechos en México."/>
-        <meta property="og:image" content="{{previewImage}}"/>
+        <meta property="og:image" itemprop="image"  content="{{previewImage}}"/>
         <meta property="og:site_name" content="vov"/>
         <meta property="og:type" content="website" />
         <meta property="og:url" content="http://vvvvovvvv.com{{ request.get_full_path }}" />
@@ -45,7 +45,8 @@
         <meta name="twitter:url" content="http://vvvvovvvv.com{{ request.get_full_path }}" />
         <meta name="twitter:description" content="{{description}}"/>
 
-        <link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+        <meta name="theme-color" content="#17ce4b">
+
         <link href="{% static "css/style.css" %}" rel="stylesheet" type="text/css"  media="all"  />
         {% block references %}{% endblock %}
     </head>
