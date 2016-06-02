@@ -67,7 +67,13 @@ def HomeView (request):
     description = "Somos productores de accesorios únicos para hombres y mujeres que buscan utilidad y buen diseño, lo necesario para acompañar su rutina diaria."
     previewImage = "https://vov.s3.amazonaws.com/img/mstile-310x310.png"
     template_name = "home.html"
-    context = {'p_list': p_list, 'single': single, 'title': title, 'description': description}
+    context = {
+            'p_list': p_list,
+            'single': single,
+            'title': title,
+            'description': description,
+            'previewImage': previewImage
+            }
     return render(request, template_name, context)
 
 def AboutView(request):
@@ -78,7 +84,13 @@ def AboutView(request):
     description = "Somos productores de accesorios únicos para hombres y mujeres que buscan utilidad y buen diseño, lo necesario para acompañar su rutina diaria."
     previewImage = "https://vov.s3.amazonaws.com/img/mstile-310x310.png"
     template_name = "about.html"
-    context = {'p_list': p_list, 'single': single, 'title': title, 'description': description, 'footer': footer}
+    context = {
+            'p_list': p_list,
+            'single': single,
+            'title': title,
+            'description': description,
+            'previewImage': previewImage
+            }
     return render(request, template_name, context)
 
 def CategoryListView(request):
@@ -89,7 +101,13 @@ def CategoryListView(request):
     description = "Somos productores de accesorios únicos para hombres y mujeres que buscan utilidad y buen diseño, lo necesario para acompañar su rutina diaria."
     previewImage = "https://vov.s3.amazonaws.com/img/mstile-310x310.png"
     template_name = "category__list.html"
-    context = {'p_list': p_list, 'single': single, 'title': title, 'description': description, 'footer': footer}
+    context = {
+            'p_list': p_list,
+            'single': single,
+            'title': title,
+            'description': description,
+            'previewImage': previewImage
+            }
     return render(request, template_name, context)
 
 def ColaboracionesView(request):
@@ -100,6 +118,13 @@ def ColaboracionesView(request):
     previewImage = "https://vov.s3.amazonaws.com/img/mstile-310x310.png"
     template_name = "colabs__list.html"
     context = {'p_list': p_list, 'single': single, 'title': title, 'description': description}
+    context = {
+            'p_list': p_list,
+            'single': single,
+            'title': title,
+            'description': description,
+            'previewImage': previewImage
+            }
     return render(request, template_name, context)
 
 def ColaboracionesSingleView(request, category_name, product_name):
@@ -110,6 +135,13 @@ def ColaboracionesSingleView(request, category_name, product_name):
     previewImage = "https://vov.s3.amazonaws.com/img/mstile-310x310.png"
     template_name = "colabs__single.html"
     context = {'p_list': p_list, 'single': single, 'title': title, 'description': description}
+    context = {
+            'p_list': p_list,
+            'single': single,
+            'title': title,
+            'description': description,
+            'previewImage': previewImage
+            }
     return render(request, template_name, context)
 
 def ProductsListView(request, category_name):
@@ -124,6 +156,13 @@ def ProductsListView(request, category_name):
     previewImage = "https://vov.s3.amazonaws.com/img/mstile-310x310.png"
     template_name = "products__list.html"
     context = {'p_list': p_list, 'single': single, 'title': title, 'description': description}
+    context = {
+            'p_list': p_list,
+            'single': single,
+            'title': title,
+            'description': description,
+            'previewImage': previewImage
+            }
     return render(request, template_name, context)
 
 def ProductsSingleView(request, category_name, product_name, variant_name):
@@ -135,6 +174,13 @@ def ProductsSingleView(request, category_name, product_name, variant_name):
     description = single.description
     previewImage = "https://vov.s3.amazonaws.com/img/mstile-310x310.png"
     template_name = "products__single.html"
+    context = {
+            'p_list': p_list,
+            'single': single,
+            'title': title,
+            'description': description,
+            'previewImage': previewImage
+            }
     context = {'p_list': p_list, 'single': single, 'title': title, 'description': description}
     return render(request, template_name, context)
 
@@ -147,6 +193,13 @@ def PressListView(request):
     previewImage = "https://vov.s3.amazonaws.com/img/mstile-310x310.png"
     template_name = "press__list.html"
     context = {'p_list': p_list, 'single': single, 'title': title, 'description': description, 'footer': footer}
+    context = {
+            'p_list': p_list,
+            'single': single,
+            'title': title,
+            'description': description,
+            'previewImage': previewImage
+            }
     return render(request, template_name, context)
 
 def PressSingleView(request, press_name):
@@ -161,6 +214,14 @@ def PressSingleView(request, press_name):
     previewImage = "https://vov.s3.amazonaws.com/img/mstile-310x310.png"
     template_name = "press__single.html"
     context = {'p_list': p_list, 'single': single, 'title': title, 'description': description, 'footer': footer, 'videos': videos}
+    context = {
+            'p_list': p_list,
+            'single': single,
+            'title': title,
+            'description': description,
+            'previewImage': previewImage,
+            'videos': videos
+            }
     return render(request, template_name, context)
 
 def ContactView(request):
@@ -171,5 +232,11 @@ def ContactView(request):
     description = "Somos productores de accesorios únicos para hombres y mujeres que buscan utilidad y buen diseño, lo necesario para acompañar su rutina diaria."
     previewImage = "https://vov.s3.amazonaws.com/img/mstile-310x310.png"
     template_name = "contact.html"
-    context = {'p_list': p_list, 'single': single, 'title': title, 'description': description, 'footer': footer}
+    context = {
+            'p_list': p_list,
+            'single': single,
+            'title': title,
+            'description': description,
+            'previewImage': previewImage,
+            }
     return render(request, template_name, context)
