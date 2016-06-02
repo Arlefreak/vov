@@ -64,7 +64,8 @@ def HomeView (request):
     p_list = ""
     single = ""
     title  = "vov"
-    description = "store"
+    description = "Somos productores de accesorios únicos para hombres y mujeres que buscan utilidad y buen diseño, lo necesario para acompañar su rutina diaria."
+    previewImage = "https://vov.s3.amazonaws.com/img/mstile-310x310.png"
     template_name = "home.html"
     context = {'p_list': p_list, 'single': single, 'title': title, 'description': description}
     return render(request, template_name, context)
@@ -74,7 +75,8 @@ def AboutView(request):
     single = ""
     footer = ProductImages.objects.order_by('?').first()
     title  = "About"
-    description = "store"
+    description = "Somos productores de accesorios únicos para hombres y mujeres que buscan utilidad y buen diseño, lo necesario para acompañar su rutina diaria."
+    previewImage = "https://vov.s3.amazonaws.com/img/mstile-310x310.png"
     template_name = "about.html"
     context = {'p_list': p_list, 'single': single, 'title': title, 'description': description, 'footer': footer}
     return render(request, template_name, context)
@@ -84,7 +86,8 @@ def CategoryListView(request):
     single = ""
     footer = ProductImages.objects.order_by('?').first()
     title  = "Catalog"
-    description = "store"
+    description = "Somos productores de accesorios únicos para hombres y mujeres que buscan utilidad y buen diseño, lo necesario para acompañar su rutina diaria."
+    previewImage = "https://vov.s3.amazonaws.com/img/mstile-310x310.png"
     template_name = "category__list.html"
     context = {'p_list': p_list, 'single': single, 'title': title, 'description': description, 'footer': footer}
     return render(request, template_name, context)
@@ -94,6 +97,7 @@ def ColaboracionesView(request):
     single = get_object_or_404(Category, sku='colaboraciones')
     title  = single.name
     description = single.description
+    previewImage = "https://vov.s3.amazonaws.com/img/mstile-310x310.png"
     template_name = "colabs__list.html"
     context = {'p_list': p_list, 'single': single, 'title': title, 'description': description}
     return render(request, template_name, context)
@@ -103,6 +107,7 @@ def ColaboracionesSingleView(request, category_name, product_name):
     p_list = ProductVariant.objects.filter(product__sku=product_name)
     title  = single.name
     description = single.description
+    previewImage = "https://vov.s3.amazonaws.com/img/mstile-310x310.png"
     template_name = "colabs__single.html"
     context = {'p_list': p_list, 'single': single, 'title': title, 'description': description}
     return render(request, template_name, context)
@@ -116,6 +121,7 @@ def ProductsListView(request, category_name):
     description = single.description
     if(len(p_list) <= 1):
         return redirect('product', category_name=single.sku, product_name=p_list[0].product.sku, variant_name=p_list[0].sku)
+    previewImage = "https://vov.s3.amazonaws.com/img/mstile-310x310.png"
     template_name = "products__list.html"
     context = {'p_list': p_list, 'single': single, 'title': title, 'description': description}
     return render(request, template_name, context)
@@ -127,6 +133,7 @@ def ProductsSingleView(request, category_name, product_name, variant_name):
     single = get_object_or_404(Product, sku=product_name)
     title  = single.name
     description = single.description
+    previewImage = "https://vov.s3.amazonaws.com/img/mstile-310x310.png"
     template_name = "products__single.html"
     context = {'p_list': p_list, 'single': single, 'title': title, 'description': description}
     return render(request, template_name, context)
@@ -136,7 +143,8 @@ def PressListView(request):
     single = ""
     footer = ProductImages.objects.order_by('?').first()
     title  = "Prensa"
-    description = "store"
+    description = "Somos productores de accesorios únicos para hombres y mujeres que buscan utilidad y buen diseño, lo necesario para acompañar su rutina diaria."
+    previewImage = "https://vov.s3.amazonaws.com/img/mstile-310x310.png"
     template_name = "press__list.html"
     context = {'p_list': p_list, 'single': single, 'title': title, 'description': description, 'footer': footer}
     return render(request, template_name, context)
@@ -149,7 +157,8 @@ def PressSingleView(request, press_name):
     single = get_object_or_404(Press, slug=press_name)
     footer = ProductImages.objects.order_by('?').first()
     title  = "vov - prensa"
-    description = "store"
+    description = "Somos productores de accesorios únicos para hombres y mujeres que buscan utilidad y buen diseño, lo necesario para acompañar su rutina diaria."
+    previewImage = "https://vov.s3.amazonaws.com/img/mstile-310x310.png"
     template_name = "press__single.html"
     context = {'p_list': p_list, 'single': single, 'title': title, 'description': description, 'footer': footer, 'videos': videos}
     return render(request, template_name, context)
@@ -159,7 +168,8 @@ def ContactView(request):
     single = ""
     footer = ProductImages.objects.order_by('?').first()
     title  = "Contact"
-    description = "Contact"
+    description = "Somos productores de accesorios únicos para hombres y mujeres que buscan utilidad y buen diseño, lo necesario para acompañar su rutina diaria."
+    previewImage = "https://vov.s3.amazonaws.com/img/mstile-310x310.png"
     template_name = "contact.html"
     context = {'p_list': p_list, 'single': single, 'title': title, 'description': description, 'footer': footer}
     return render(request, template_name, context)
