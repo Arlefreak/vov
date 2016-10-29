@@ -4,7 +4,7 @@ from .models import Product, Category, ProductImages, ProductVariant, Press, Pre
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 from solo.admin import SingletonModelAdmin
-
+import nested_admin
 
 class ProductResource(resources.ModelResource):
     class Meta:
@@ -19,13 +19,14 @@ class CategoryResource(resources.ModelResource):
         model = Category
 
 
-class productVariantInline(admin.TabularInline):
+class productImagesInline(nested_admin.NestedStackedInline):
+    model = ProductImages
+    extra = 1
+
+class productVariantInline(nested_admin.NestedStackedInline):
     model = ProductVariant
     extra = 0
-
-class productImagesInline(admin.TabularInline):
-    model = ProductImages
-    extra = 0
+    inlines = [productImagesInline]
 
 class storeImagesInline(admin.TabularInline):
     model = StoreImage
@@ -38,7 +39,7 @@ class pressVideoInline(admin.TabularInline):
     model = VideoPress
     extra = 0
 
-class ProductAdmin(OrderedModelAdmin, ImportExportModelAdmin):
+class ProductAdmin(nested_admin.NestedModelAdmin, OrderedModelAdmin, ImportExportModelAdmin):
     list_display = (
         'move_up_down_links',
         'sku',
