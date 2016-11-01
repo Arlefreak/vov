@@ -18,6 +18,10 @@ var pngquant    = require('imagemin-pngquant');
 var gifsicle    = require('imagemin-gifsicle');
 var jpegtran    = require('imagemin-jpegtran');
 var svgo        = require('imagemin-svgo');
+var browserify  = require('browserify');
+var gutil       = require('gulp-util');
+var babelify       = require('babelify');
+var source = require('vinyl-source-stream')
 
 var DEBUG = process.env.NODE_ENV === 'production' ? false : true;
 var dest = '../store/';
@@ -154,9 +158,9 @@ gulp.task('connect', function() {
     });
 });
 
-gulp.task('init', ['css', 'bower', 'react', 'img', 'html', 'files', 'font']);
+gulp.task('init', ['css', 'bower', 'img', 'html', 'files', 'font']);
 
-gulp.task('watch', ['css', 'react', 'img', 'html', 'connect'], function() {
+gulp.task('watch', ['css', 'img', 'html', 'connect'], function() {
     gulp.watch('src/css/**/*.styl', ['css']);
     gulp.watch('src/js/**/*.js', ['react']);
     gulp.watch('src/js/**/*.jsx', ['react']);

@@ -204,7 +204,6 @@ textarea {
 .halfCircle-up {
   height: 20px;
   width: 40px;
-  -webkit-border-radius: 40px 40px 0 0;
   border-radius: 40px 40px 0 0;
   -moz-border-radius: 40px 40px 0 0;
   -webkit-border-radius: 40px 40px 0 0;
@@ -213,7 +212,6 @@ textarea {
 .halfCircle-down {
   height: 20px;
   width: 40px;
-  -webkit-border-radius: 0 0 40px 40px;
   border-radius: 0 0 40px 40px;
   -moz-border-radius: 0 0 40px 40px;
   -webkit-border-radius: 0 0 40px 40px;
@@ -222,7 +220,6 @@ textarea {
 .halfCircle-right {
   height: 40px;
   width: 20px;
-  -webkit-border-radius: 0 40px 40px 0;
   border-radius: 0 40px 40px 0;
   -moz-border-radius: 0 40px 40px 0;
   -webkit-border-radius: 0 40px 40px 0;
@@ -231,7 +228,6 @@ textarea {
 .halfCircle-left {
   height: 40px;
   width: 20px;
-  -webkit-border-radius: 40px 0 0 40px;
   border-radius: 40px 0 0 40px;
   -moz-border-radius: 40px 0 0 40px;
   -webkit-border-radius: 40px 0 0 40px;
@@ -469,6 +465,12 @@ a {
   color: #000;
   text-decoration: none;
 }
+strong {
+  font-weight: bold;
+}
+em {
+  font-style: italic;
+}
 .wrapper {
   width: 90%;
   max-width: 1024px;
@@ -532,14 +534,12 @@ main.wrapper {
 }
 .blueberry .pager li a {
   padding: 18px 8px;
-  -webkit-border-radius: 6px;
   border-radius: 6px;
 }
 .blueberry .pager li a span {
   overflow: hidden;
   background: #c0c0c0;
   text-indent: -9999px;
-  -webkit-border-radius: 2px;
   border-radius: 2px;
 }
 .blueberry .pager li.active a span {
@@ -626,6 +626,15 @@ main.wrapper {
 }
 .main-image img.category {
   max-width: 300px;
+}
+.videos {
+  width: 100%;
+  height: auto;
+  margin: auto;
+}
+.videos iframe {
+  width: 100%;
+  margin: 0 auto 20px auto;
 }
 .item-info {
   border: 1px solid #000;

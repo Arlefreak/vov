@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static from staticfiles %}
+{% load embed_video_tags %}
 {% block references %}
     <link href="{% static "lib/css/lightbox.css" %}" rel="stylesheet" type="text/css"  media="all"  />
 {% endblock %}
@@ -14,6 +15,13 @@
             <p>${{ single.price }}</p>
         </div>
     </section>
+    {% if v_list %}
+    <section class="videos">
+        {% for item in v_list %}
+            {% video item.video %}
+        {% endfor %}
+    </section>
+    {% endif %}
     {% for item in p_list %}
     <section class="main-image">
             <img src="{{ item.image.url }}" alt="{{ item.name }}"/>

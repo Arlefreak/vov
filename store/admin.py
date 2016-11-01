@@ -1,10 +1,11 @@
 from django.contrib import admin
 from ordered_model.admin import OrderedModelAdmin
-from .models import Product, Category, ProductImages, ProductVariant, Press, PressImage, VideoPress, Stores, Store, StoreImage
+from .models import Product, Category, ProductImages, ProductVariant, Press, PressImage, VideoPress, Stores, Store, StoreImage, ProductVideo
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 from solo.admin import SingletonModelAdmin
 import nested_admin
+from embed_video.admin import AdminVideoMixin
 
 class ProductResource(resources.ModelResource):
     class Meta:
@@ -18,15 +19,18 @@ class CategoryResource(resources.ModelResource):
     class Meta:
         model = Category
 
-
 class productImagesInline(nested_admin.NestedStackedInline):
     model = ProductImages
+    extra = 1
+
+class productVideosInline(nested_admin.NestedStackedInline):
+    model = ProductVideo
     extra = 1
 
 class productVariantInline(nested_admin.NestedStackedInline):
     model = ProductVariant
     extra = 0
-    inlines = [productImagesInline]
+    inlines = [productImagesInline, productVideosInline]
 
 class storeImagesInline(admin.TabularInline):
     model = StoreImage
@@ -82,7 +86,7 @@ class ProductVariantAdmin(OrderedModelAdmin, ImportExportModelAdmin):
     )
     list_editable= ('inventory',)
     list_display_links = ('sku', 'product', 'image_img')
-    inlines = [ productImagesInline ]
+    inlines = [ productImagesInline, productVideosInline ]
     list_filter = ('product',)
     search_fields = ('name', 'sku',)
     resource_class = ProductVariantResource
@@ -173,10 +177,31 @@ class ProductImageAdmin(OrderedModelAdmin):
         'product',
     )
 
+class ProductVideoAdmin(AdminVideoMixin, OrderedModelAdmin):
+    list_display = (
+        'move_up_down_links',
+        'order',
+        'name',
+        'product',
+    )
+    list_display_links = (
+        'order',
+        'name',
+        'product',
+    )
+    list_filter = (
+        'product__product',
+        'product',
+    )
+    search_fields = (
+        'name',
+        'product',
+    )
 
 admin.site.register(Product, ProductAdmin)
 admin.site.register(ProductVariant, ProductVariantAdmin)
 admin.site.register(ProductImages, ProductImageAdmin)
+admin.site.register(ProductVideo, ProductVideoAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Press, PressAdmin)
 admin.site.register(Stores, StoresAdmin)

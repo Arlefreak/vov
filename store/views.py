@@ -165,6 +165,7 @@ def ProductsListView(request, category_name):
 def ProductsSingleView(request, category_name, product_name, variant_name):
     # p_list = get_object_or_404(Product, sku=product_name, category__sky=category_name)
     p_list = get_object_or_404(ProductVariant, sku=variant_name, product__sku=product_name)
+    v_list = p_list.video_gallery
     p_list = p_list.gallery
     single = get_object_or_404(Product, sku=product_name)
     title  = single.name
@@ -173,6 +174,7 @@ def ProductsSingleView(request, category_name, product_name, variant_name):
     template_name = "products__single.html"
     context = {
             'p_list': p_list,
+            'v_list': v_list,
             'single': single,
             'title': title,
             'description': description,

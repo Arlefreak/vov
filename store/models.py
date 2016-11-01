@@ -92,6 +92,9 @@ class ProductVariant(OrderedModel):
     def gallery(self):
         gal = ProductImages.objects.filter(product=self)
         return gal
+    def video_gallery(self):
+        gal = ProductVideo.objects.filter(product=self)
+        return gal
     def image(self):
         img = ProductImages.objects.filter(product=self).first()
         if(img):
@@ -135,6 +138,21 @@ class ProductImages(OrderedModel):
             return 'No Image'
     image_img.short_description = 'image'
     image_img.allow_tags = True
+
+class ProductVideo(OrderedModel):
+    product      = models.ForeignKey('ProductVariant')
+    name        = models.CharField('Name',default='', max_length=140)
+    video       = EmbedVideoField()
+    date         = models.DateField('Date added', auto_now_add=True)
+    updated      = models.DateField('Date updated', auto_now=True)
+    class Meta:
+        ordering = ['order', 'date']
+        verbose_name = 'video'
+        verbose_name_plural = 'video'
+    def __unicode__(self):
+        return u'%s' % (self.video.url)
+    def __str__(self):
+        return u'%s' % (self.name)
 class Category(OrderedModel):
     sku          = models.SlugField('SKU', unique=True, max_length=50, editable=False)
     publish      = models.BooleanField('Publish', default=False)
@@ -273,8 +291,8 @@ class Store(SingletonModel):
     mail = models.EmailField('Email',default='', blank=True)
     phone = models.CharField('Phone',default='', max_length=140, blank=True)
     instagram = models.CharField('Instagram', default='', max_length=140,blank=True)
-    facebook = models.URLField('Facebook', default='', blank=True)
-    twitter = models.URLField('Twitter', default='', blank=True)
+    facebook = models.CharField('Facebook', default='', max_length=140, blank=True)
+    twitter = models.CharField('Twitter', default='', max_length=140, blank=True)
     class Meta:
         verbose_name = 'VOV'
         verbose_name_plural = 'VOV'
