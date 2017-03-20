@@ -697,6 +697,9 @@ main.wrapper {
 .item-info section.flex {
   width: 45%;
 }
+.item-info section.flex.full {
+  width: 60%;
+}
 .price {
   color: #17ce4b;
 }
