@@ -9,9 +9,9 @@
     </section>
     <section class="item-info">
         <h2 class="flex">{{ single.name }}</h2>
-        <p class="flex">
-            {{ single.description }}
-        </p>
+        <section class="flex">
+            {{ single.description | safe}}
+        </section>
     </section>
     <ul class="catalog">
         {% for item in p_list %}

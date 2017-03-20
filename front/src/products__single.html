@@ -8,9 +8,9 @@
 <main class="wrapper">
     <section class="item-info">
         <h2 class="flex">{{ single.name }}</h2>
-        <p class="flex">
-            {{ single.description }}
-        </p>
+        <section class="flex">
+            {{ single.description | safe}}
+        </section>
         <div class="flex price">
             <p>${{ single.price }}</p>
         </div>

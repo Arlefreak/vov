@@ -13,10 +13,13 @@ SECRET_KEY = env('SECRET_KEY')
 
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = [
-    '.arlefreak.com',
-    '.vvvvovvvv.com',
-]
+if(DEBUG):
+    ALLOWED_HOSTS = []
+else:
+    ALLOWED_HOSTS = [
+        '.arlefreak.com',
+        '.vvvvovvvv.com',
+    ]
 
 ADMINS = (('Arlefreak', 'hi@arlefreak.com'),)
 

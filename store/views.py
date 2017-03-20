@@ -152,6 +152,7 @@ def ProductsListView(request, category_name):
     if(len(p_list) <= 1):
         return redirect('product', category_name=single.sku, product_name=p_list[0].product.sku, variant_name=p_list[0].sku)
     previewImage = "https://vov.s3.amazonaws.com/img/preview.png"
+    previewImage = str(ProductImages.objects.filter(product__sku=p_list[0].sku).first())
     template_name = "products__list.html"
     context = {
             'p_list': p_list,

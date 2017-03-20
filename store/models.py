@@ -22,7 +22,7 @@ def upload_image_to(instance, filename):
 class Product (OrderedModel):
     sku           = models.SlugField('SKU', unique=True, max_length=50, editable=False)
     name          = models.CharField('Name',default='', max_length=140)
-    description   = models.TextField('Description', default='', blank=True)
+    description   = RichTextField('Description', default='', blank=True)
     image         = models.ImageField('Main image', upload_to=upload_image_to, blank=True, null=True)
     price         = models.FloatField('Price', default=0.0)
     discount      = models.FloatField('Discount', default=0.0)
@@ -157,7 +157,7 @@ class Category(OrderedModel):
     sku          = models.SlugField('SKU', unique=True, max_length=50, editable=False)
     publish      = models.BooleanField('Publish', default=False)
     name         = models.CharField('Name',default='', max_length=140)
-    description   = models.TextField('Description', default='', blank=True)
+    description   = RichTextField('Description', default='', blank=True)
     image        = models.ImageField('Image', upload_to=upload_image_to, blank=True, null=True)
     date         = models.DateField('Date added', auto_now_add=True)
     updated      = models.DateField('Date updated', auto_now=True)

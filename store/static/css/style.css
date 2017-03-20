@@ -694,7 +694,7 @@ main.wrapper {
 .item-info h2.flex {
   width: 40%;
 }
-.item-info p.flex {
+.item-info section.flex {
   width: 45%;
 }
 .price {
