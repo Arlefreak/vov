@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from store.models import Product, ProductImages, Category, ShoppingCartProduct, Order, Adress, ProductVariant, Press, Stores, StoreImage
 from store.serializers import ProductSerializer, ProductImageSerializer, CategorySerializer, \
     ShoppingCartProductSerializer, OrderSerializer, AdressSerializer, UserSerializer
@@ -6,9 +7,10 @@ from rest_framework import viewsets
 from rest_framework import filters
 from taggit.models import Tag
 from taggit_serializer.serializers import TaggitSerializer
-# from django.views.generic import TemplateView
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.models import User
+from django.utils.html import strip_tags
+from bleach import clean
 
 class ProductViewSet(viewsets.ModelViewSet):
     queryset           = Product.objects.all()
@@ -114,7 +116,7 @@ def ColaboracionesView(request):
     p_list = Product.objects.filter(category__sku='colaboraciones')
     single = get_object_or_404(Category, sku='colaboraciones')
     title  = single.name
-    description = single.description
+    description =  strip_tags(single.description)
     previewImage = "https://vov.s3.amazonaws.com/img/preview.png"
     template_name = "colabs__list.html"
     context = {
@@ -130,7 +132,7 @@ def ColaboracionesSingleView(request, category_name, product_name):
     single = get_object_or_404(Product, sku=product_name)
     p_list = ProductVariant.objects.filter(product__sku=product_name)
     title  = single.name
-    description = single.description
+    description = strip_tags(single.description)
     previewImage = "https://vov.s3.amazonaws.com/img/preview.png"
     template_name = "colabs__single.html"
     context = {
@@ -148,7 +150,9 @@ def ProductsListView(request, category_name):
         p_list = Product.objects.filter(category__sku=category_name)
     single = get_object_or_404(Category, sku=category_name)
     title  = single.name
-    description = single.description
+    description = clean(single.description, strip=True)
+    description = description.encode('utf-8')
+    description = description.decode('utf-8')
     if(len(p_list) <= 1):
         return redirect('product', category_name=single.sku, product_name=p_list[0].product.sku, variant_name=p_list[0].sku)
     previewImage = "https://vov.s3.amazonaws.com/img/preview.png"
@@ -170,7 +174,7 @@ def ProductsSingleView(request, category_name, product_name, variant_name):
     p_list = p_list.gallery
     single = get_object_or_404(Product, sku=product_name)
     title  = single.name
-    description = single.description
+    description = strip_tags(single.description)
     previewImage = str(ProductImages.objects.filter(product__sku=variant_name).first())
     template_name = "products__single.html"
     context = {
