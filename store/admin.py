@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.urls import reverse
 from ordered_model.admin import OrderedModelAdmin
 from .models import Product, Category, ProductImages, ProductVariant, Press, PressImage, VideoPress, Stores, Store, StoreImage, ProductVideo
 from import_export import resources
@@ -39,84 +40,111 @@ class storeImagesInline(admin.TabularInline):
 class pressImageInline(admin.TabularInline):
     model = PressImage
     extra = 0
+
 class pressVideoInline(admin.TabularInline):
     model = VideoPress
     extra = 0
 
+@admin.register(Product)
 class ProductAdmin(nested_admin.NestedModelAdmin, OrderedModelAdmin, ImportExportModelAdmin):
     list_display = (
         'move_up_down_links',
-        'sku',
         'name',
-        'stock',
         'price',
-        'status',
-        'date',
-        'image_img',
+        # 'status',
+        # 'date',
+        'admin_description',
+        # 'image_img',
+        'view_on_site',
     )
     list_editable= ('price', )
-    list_display_links = ('sku', 'name')
+    list_display_links = ('name', 'admin_description')
     inlines = [ productVariantInline ]
     list_filter = ('category',)
     search_fields = ('name', 'sku',)
     resource_class = ProductResource
+    save_on_top = True
+    def admin_description(self, obj):
+        return '<div style="max-width:300px">%s<div>' % obj.description
+    def view_on_site(self, obj):
+        url = reverse('products', kwargs={'category_name': obj.category.sku })
+        return '<a class="button" target="_blank" href="http://vvvvovvvv.com%s">View</a>' % url
 
+    view_on_site.allow_tags = True
+    admin_description.allow_tags = True
+    view_on_site.short_description = 'View on Site'
+    admin_description.short_description = 'Description'
+
+@admin.register(Press)
 class PressAdmin(OrderedModelAdmin, ImportExportModelAdmin):
     list_display = (
         'move_up_down_links',
         'publish',
-        'slug',
         'title',
         'date_article',
         'date',
+        'view_on_site',
     )
     list_editable= ('publish', 'date_article')
-    list_display_links = ('slug', 'title')
+    list_display_links = ('title', )
     inlines = [ pressImageInline, pressVideoInline]
     search_fields = ('title', 'slug',)
+    def view_on_site(self, obj):
+        url = reverse('press_single', kwargs={'press_name': obj.slug})
+        return '<a class="button" target="_blank" href="http://vvvvovvvv.com%s">View</a>' % url
+    view_on_site.allow_tags = True
 
+@admin.register(ProductVariant)
 class ProductVariantAdmin(OrderedModelAdmin, ImportExportModelAdmin):
     list_display = (
         'move_up_down_links',
-        'product',
-        'sku',
+        'parent_product',
+        'product_variant',
         'inventory',
         'date',
         'image_img',
+        'view_on_site',
     )
     list_editable= ('inventory',)
-    list_display_links = ('sku', 'product', 'image_img')
+    list_display_links = ('parent_product', 'product_variant', )
     inlines = [ productImagesInline, productVideosInline ]
     list_filter = ('product',)
     search_fields = ('name', 'sku',)
     resource_class = ProductVariantResource
+    def product_variant(self, obj):
+        return obj.name
+    def parent_product(self, obj):
+        return obj.product.name
+    def view_on_site(self, obj):
+        url = reverse('product', kwargs={'category_name': obj.product.category.sku, 'product_name': obj.product.sku, 'variant_name': obj.sku})
+        return '<a class="button" target="_blank" href="http://vvvvovvvv.com%s">View</a>' % url
+    view_on_site.allow_tags = True
+    parent_product.short_description = 'Product'
+    product_variant.short_description = 'Variant'
 
+@admin.register(Category)
 class CategoryAdmin(OrderedModelAdmin, ImportExportModelAdmin):
     list_display = (
         'move_up_down_links',
         'publish',
-        'sku',
         'name',
+        'admin_description',
         'image_img',
+        'view_on_site',
     )
-    list_display_links = ('sku', 'name', 'image_img')
+    list_display_links = ('name', 'image_img')
     list_editable = ('publish',)
-    search_fields = ('name', 'sku',)
+    search_fields = ('name',)
     resource_class = CategoryResource
+    def admin_description(self, obj):
+        return '<div style="max-width:300px">%s<div>' % obj.description
+    def view_on_site(self, obj):
+        url = reverse('products', kwargs={'category_name': obj.sku})
+        return '<a class="button" target="_blank" href="http://vvvvovvvv.com%s">View</a>' % url
+    view_on_site.allow_tags = True
+    admin_description.allow_tags = True
 
-class StoresAdmin(OrderedModelAdmin):
-    list_display = (
-        'move_up_down_links',
-        'publish',
-        'slug',
-        'name',
-        'adress',
-        'mail',
-    )
-    list_display_links = ('slug', 'name', 'adress', 'mail')
-    list_editable= ('publish',)
-    search_fields = ('name', 'slug',)
-
+@admin.register(Store)
 class StoreAdmin(SingletonModelAdmin):
     list_display = (
         'name',
@@ -127,46 +155,18 @@ class StoreAdmin(SingletonModelAdmin):
     list_display_links = ('name', 'small_description', 'mail', 'phone')
     inlines = [ storeImagesInline ]
 
-class AdressAdmin(admin.ModelAdmin):
-    list_display = ('client', 'name', 'type', 'default', 'country', 'zipcode')
-
-class ClientAdmin(admin.ModelAdmin):
-    list_display = ('get_username', 'get_first_name', 'get_last_name', 'get_email')
-    def get_username(self, obj):
-        return obj.user.username
-    def get_first_name(self, obj):
-        return obj.user.first_name
-    def get_last_name(self, obj):
-        return obj.user.last_name
-    def get_email(self, obj):
-        return obj.user.email
-    get_username.short_description = "Username"
-    get_first_name.short_description = "Firstname"
-    get_last_name.short_description = "Lastname"
-    get_email.short_description = "Email"
-    get_username.admin_order_field = 'user__username'
-    get_first_name.admin_order_field = 'user__first_name'
-    get_last_name.admin_order_field = 'user__last_name'
-    get_email.admin_order_field = 'user__email'
-
-class OrderAdmin(admin.ModelAdmin):
-    list_display = ('sku', 'client', 'shippingAdress', 'billingAdress', 'items_subTotal','shipping_cost','taxes_cost', 'total','shipping_carrier', 'shipping_tracking','date', 'updated', 'status')
-
-class ShoppingCartProductAdmin(admin.ModelAdmin):
-    list_display = ('client', 'product', 'cuantity')
-
+@admin.register(ProductImages)
 class ProductImageAdmin(OrderedModelAdmin):
     list_display = (
         'move_up_down_links',
-        'order',
-        'name',
-        'product',
+        'parent_product',
+        'product_variant',
         'image_img',
+        'view_on_site',
     )
     list_display_links = (
-        'order',
-        'name',
-        'product',
+        'parent_product',
+        'product_variant',
     )
     list_filter = (
         'product__product',
@@ -176,7 +176,18 @@ class ProductImageAdmin(OrderedModelAdmin):
         'name',
         'product',
     )
+    def product_variant(self, obj):
+        return obj.product
+    def parent_product(self, obj):
+        return obj.product.product
+    def view_on_site(self, obj):
+        url = reverse('product', kwargs={'category_name': obj.product.product.category.sku, 'product_name': obj.product.product.sku, 'variant_name': obj.product.sku})
+        return '<a class="button" target="_blank" href="http://vvvvovvvv.com%s">View</a>' % url
+    parent_product.short_description = 'Product'
+    product_variant.short_description = 'Variant'
+    view_on_site.allow_tags = True
 
+@admin.register(ProductVideo)
 class ProductVideoAdmin(AdminVideoMixin, OrderedModelAdmin):
     list_display = (
         'move_up_down_links',
@@ -198,15 +209,3 @@ class ProductVideoAdmin(AdminVideoMixin, OrderedModelAdmin):
         'product',
     )
 
-admin.site.register(Product, ProductAdmin)
-admin.site.register(ProductVariant, ProductVariantAdmin)
-admin.site.register(ProductImages, ProductImageAdmin)
-admin.site.register(ProductVideo, ProductVideoAdmin)
-admin.site.register(Category, CategoryAdmin)
-admin.site.register(Press, PressAdmin)
-admin.site.register(Stores, StoresAdmin)
-admin.site.register(Store, StoreAdmin)
-# admin.site.register(Adress, AdressAdmin)
-# admin.site.register(Client, ClientAdmin)
-# admin.site.register(Order, OrderAdmin)
-# admin.site.register(ShoppingCartProduct, ShoppingCartProductAdmin)

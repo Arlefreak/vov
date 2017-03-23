@@ -157,8 +157,8 @@ class Category(OrderedModel):
     sku          = models.SlugField('SKU', unique=True, max_length=50, editable=False)
     publish      = models.BooleanField('Publish', default=False)
     name         = models.CharField('Name',default='', max_length=140)
-    description   = RichTextField('Description', default='', blank=True)
     image        = models.ImageField('Image', upload_to=upload_image_to, blank=True, null=True)
+    description   = RichTextField('Description', default='', blank=True)
     date         = models.DateField('Date added', auto_now_add=True)
     updated      = models.DateField('Date updated', auto_now=True)
     class Meta:
@@ -174,8 +174,8 @@ class Category(OrderedModel):
         super(Category, self).save(**kwargs)
     def image_img(self):
         if self.image:
-            return u'<img src="%s" style="width: 100px;'\
-                ' height: auto; display: block;"/>' % self.image.url
+            return u'<img src="%s" style="height: 150px;'\
+                ' width: auto; display: block;"/>' % self.image.url
         else:
             return 'No Image'
     image_img.short_description = 'Image'
@@ -317,8 +317,8 @@ class StoreImage(OrderedModel):
         return u'%s' % (self.image.url)
     def image_img(self):
         if self.image:
-            return u'<img src="%s" style="width: 100px;'\
-                ' height: auto; display: block;"/>' % self.image.url
+            return u'<img src="%s" style="height: 150px;'\
+                ' width: auto; display: block;"/>' % self.image.url
         else:
             return 'No Image'
     image_img.short_description = 'image'

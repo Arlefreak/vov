@@ -8,10 +8,10 @@ root = environ.Path(__file__) - 3
 env = environ.Env(DEBUG=(bool, True),)
 environ.Env.read_env()
 
-
 SECRET_KEY = env('SECRET_KEY')
-
 DEBUG = env('DEBUG')
+
+DATA_UPLOAD_MAX_NUMBER_FIELDS = None
 
 if(DEBUG):
     ALLOWED_HOSTS = []
