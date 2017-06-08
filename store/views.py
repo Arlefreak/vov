@@ -67,7 +67,7 @@ def HomeView (request):
     single = ""
     title  = "vov"
     description = "Somos productores de accesorios únicos para hombres y mujeres que buscan utilidad y buen diseño, lo necesario para acompañar su rutina diaria."
-    previewImage = Store.get_solo().image
+    previewImage = Store.get_solo().image.url
     template_name = "home.html"
     context = {
             'p_list': p_list,
@@ -84,7 +84,7 @@ def AboutView(request):
     footer = ProductImages.objects.order_by('?').first()
     title  = "About"
     description = "Somos productores de accesorios únicos para hombres y mujeres que buscan utilidad y buen diseño, lo necesario para acompañar su rutina diaria."
-    previewImage = Store.get_solo().image
+    previewImage = Store.get_solo().image.url
     template_name = "about.html"
     context = {
             'p_list': p_list,
@@ -101,7 +101,7 @@ def CategoryListView(request):
     footer = ProductImages.objects.order_by('?').first()
     title  = "Catalog"
     description = "Somos productores de accesorios únicos para hombres y mujeres que buscan utilidad y buen diseño, lo necesario para acompañar su rutina diaria."
-    previewImage = Store.get_solo().image
+    previewImage = Store.get_solo().image.url
     template_name = "category__list.html"
     context = {
             'p_list': p_list,
@@ -117,7 +117,7 @@ def ColaboracionesView(request):
     single = get_object_or_404(Category, sku='colaboraciones')
     title  = single.name
     description =  strip_tags(single.description)
-    previewImage = Store.get_solo().image
+    previewImage = Store.get_solo().image.url
     template_name = "colabs__list.html"
     context = {
             'p_list': p_list,
@@ -133,7 +133,7 @@ def ColaboracionesSingleView(request, category_name, product_name):
     p_list = ProductVariant.objects.filter(product__sku=product_name)
     title  = single.name
     description = strip_tags(single.description)
-    previewImage = Store.get_solo().image
+    previewImage = Store.get_solo().image.url
     template_name = "colabs__single.html"
     context = {
             'p_list': p_list,
@@ -155,7 +155,7 @@ def ProductsListView(request, category_name):
     description = description.decode('utf-8')
     if(len(p_list) <= 1):
         return redirect('product', category_name=single.sku, product_name=p_list[0].product.sku, variant_name=p_list[0].sku)
-    previewImage = Store.get_solo().image
+    previewImage = Store.get_solo().image.url
     previewImage = str(ProductImages.objects.filter(product__sku=p_list[0].sku).first())
     template_name = "products__list.html"
     context = {
@@ -193,7 +193,7 @@ def PressListView(request):
     footer = ProductImages.objects.order_by('?').first()
     title  = "Prensa"
     description = "Somos productores de accesorios únicos para hombres y mujeres que buscan utilidad y buen diseño, lo necesario para acompañar su rutina diaria."
-    previewImage = Store.get_solo().image
+    previewImage = Store.get_solo().image.url
     template_name = "press__list.html"
     context = {
             'p_list': p_list,
@@ -213,7 +213,7 @@ def PressSingleView(request, press_name):
     footer = ProductImages.objects.order_by('?').first()
     title  = "vov - prensa"
     description = "Somos productores de accesorios únicos para hombres y mujeres que buscan utilidad y buen diseño, lo necesario para acompañar su rutina diaria."
-    previewImage = Store.get_solo().image
+    previewImage = Store.get_solo().image.url
     template_name = "press__single.html"
     context = {
             'p_list': p_list,
