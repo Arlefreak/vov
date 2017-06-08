@@ -286,6 +286,7 @@ class Transaction(models.Model):
 
 class Store(SingletonModel):
     name = models.CharField('Name',default='', max_length=140)
+    image = models.ImageField('Preview Image', upload_to=upload_image_to)
     small_description = models.CharField('Small description', default='', max_length=140)
     big_description = RichTextField('Description', default='')
     mail = models.EmailField('Email',default='', blank=True)
