@@ -10,12 +10,18 @@
             margin 0 2.5% 20px 0
             @media screen and (max-width: $max-width-mobile)
                 margin 0 2.5% 20px 2.5%
+            @media screen and (max-width: $max-width-small)
+                margin 0 auto 20px auto
         &:nth-child(4n)
             margin 0 0 20px 2.5%
             @media screen and (max-width: $max-width-mobile)
                 margin 0 2.5% 20px 2.5%
+            @media screen and (max-width: $max-width-small)
+                margin 0 auto 20px auto
         @media screen and (max-width: $max-width-mobile)
             width 45%
+        @media screen and (max-width: $max-width-small)
+            width 100%
         img
             display block
             width 100%
@@ -79,8 +85,12 @@
         width 40%
     section.flex
         width 45%
+        @media screen and (max-width: $max-width-mobile)
+            width 100%
     section.flex.full
         width 60%
+        @media screen and (max-width: $max-width-mobile)
+            width 100%
 .price
     color $color3
 .parallax
