@@ -232,6 +232,7 @@ def ContactView(request):
     title  = "Contact"
     description = "Somos productores de accesorios únicos para hombres y mujeres que buscan utilidad y buen diseño, lo necesario para acompañar su rutina diaria."
     template_name = "contact.html"
+    previewImage = Store.get_solo().image.url
     context = {
             'p_list': p_list,
             'single': single,
