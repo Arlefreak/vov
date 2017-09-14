@@ -29,7 +29,7 @@ class Product (SortableMixin):
     price         = models.FloatField('Price', default=0.0)
     discount      = models.FloatField('Discount', default=0.0)
     tags          = TaggableManager(blank=True)
-    category      = models.ForeignKey('Category')
+    category      = SortableForeignKey('Category')
     statusChoices = (('IN','In stock'),('OUT','Out of stock'))
     status        = models.CharField('Status', choices=statusChoices, max_length=3, default='OUT', editable=False)
     date          = models.DateField('Date added', auto_now_add=True)

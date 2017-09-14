@@ -19,6 +19,11 @@ class CategoryResource(resources.ModelResource):
     class Meta:
         model = Category
 
+class productInline(SortableTabularInline):
+    model = Product
+    extra = 1
+    classes = ['collapse']
+
 class productImagesInline(SortableTabularInline):
     model = ProductImages
     extra = 1
@@ -137,6 +142,7 @@ class CategoryAdmin(SortableAdmin, ImportExportModelAdmin):
     list_editable = ('publish',)
     search_fields = ('name',)
     resource_class = CategoryResource
+    inlines = [ productInline ]
     def admin_description(self, obj):
         return '<div style="max-width:300px">%s<div>' % obj.description
     def view_on_site(self, obj):
