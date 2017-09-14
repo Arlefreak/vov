@@ -132,7 +132,7 @@ class CategoryAdmin(OrderedModelAdmin, ImportExportModelAdmin):
         'image_img',
         'view_on_site',
     )
-    list_display_links = ('name', 'image_img')
+    list_display_links = ('name', 'admin_description','image_img')
     list_editable = ('publish',)
     search_fields = ('name',)
     resource_class = CategoryResource
