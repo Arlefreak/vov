@@ -89,9 +89,9 @@ class ProductVariant(SortableMixin):
         verbose_name = 'Product Variant'
         verbose_name_plural = 'Product Variants'
     def __unicode__(self):
-        return u'%s' % (self.name)
+        return u'%s - %s' % (self.product.name, self.name)
     def __str__(self):
-        return u'%s' % (self.name)
+        return u'%s - %s' % (self.product.name, self.name)
 
     def save(self, *args, **kwargs):
         self.sku = uuslug(self.name, instance=self, slug_field='sku')
@@ -132,9 +132,9 @@ class ProductImages(SortableMixin):
         verbose_name = 'Product Variant Image'
         verbose_name_plural = 'Product Variant Images'
     def __unicode__(self):
-        return u'%s' % (self.image.url)
+        return u'%s - %s' % (self.product.name, self.name)
     def __str__(self):
-        return u'%s' % (self.image.url)
+        return u'%s - %s' % (self.product.name, self.name)
 
     def image_img(self):
         if self.image:
