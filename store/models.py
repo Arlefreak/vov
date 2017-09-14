@@ -5,7 +5,8 @@ from taggit.managers            import TaggableManager
 from django.contrib.auth.models import User
 from django_countries.fields    import CountryField
 from django.utils.translation   import ugettext_lazy as _
-from ordered_model.models       import OrderedModel
+from adminsortable.models       import SortableMixin
+from adminsortable.fields import SortableForeignKey
 from solo.models                import SingletonModel
 from embed_video.fields         import EmbedVideoField
 from ckeditor.fields            import RichTextField
@@ -19,8 +20,9 @@ def upload_image_to(instance, filename):
         now().strftime("%Y%m%d%H%M%S"),
         filename_ext.lower(),)
 
-class Product (OrderedModel):
+class Product (SortableMixin):
     sku           = models.SlugField('SKU', unique=True, max_length=50, editable=False)
+    order         = models.PositiveIntegerField(default=0, editable=False, db_index=True)
     name          = models.CharField('Name',default='', max_length=140)
     description   = RichTextField('Description', default='', blank=True)
     image         = models.ImageField('Main image', upload_to=upload_image_to, blank=True, null=True)
@@ -34,8 +36,8 @@ class Product (OrderedModel):
     updated       = models.DateField('Date updated', auto_now=True)
     class Meta:
         ordering  = ['order', 'date', 'sku']
-        verbose_name = 'product'
-        verbose_name_plural = 'products'
+        verbose_name = 'Product'
+        verbose_name_plural = 'Products'
     def __unicode__(self):
         return u'%s' % (self.sku)
     def __str__(self):
@@ -74,13 +76,18 @@ class Product (OrderedModel):
         else:
             return 'No Variants'
 
-class ProductVariant(OrderedModel):
-    product      = models.ForeignKey('Product')
+class ProductVariant(SortableMixin):
+    order         = models.PositiveIntegerField(default=0, editable=False, db_index=True)
+    product      = SortableForeignKey('Product')
     name         = models.CharField('Name',default='', max_length=140)
     sku           = models.SlugField('SKU', unique=True, max_length=50, editable=False)
     inventory     = models.IntegerField('Inventory', default=0)
     date          = models.DateField('Date added', auto_now_add=True)
     updated       = models.DateField('Date updated', auto_now=True)
+    class Meta:
+        ordering = ['order', 'product']
+        verbose_name = 'Product Variant'
+        verbose_name_plural = 'Product Variants'
     def __unicode__(self):
         return u'%s' % (self.name)
     def __str__(self):
@@ -112,8 +119,9 @@ class ProductVariant(OrderedModel):
     image_img.short_description = 'image'
     image_img.allow_tags = True
 
-class ProductImages(OrderedModel):
-    product      = models.ForeignKey('ProductVariant')
+class ProductImages(SortableMixin):
+    order         = models.PositiveIntegerField(default=0, editable=False, db_index=True)
+    product      = SortableForeignKey('ProductVariant')
     name         = models.CharField('Name',default='', max_length=140)
     image         = models.ImageField('Image', upload_to=upload_image_to)
     date         = models.DateField('Date added', auto_now_add=True)
@@ -121,8 +129,8 @@ class ProductImages(OrderedModel):
     order_with_respect_to = 'product'
     class Meta:
         ordering = ['order', 'date']
-        verbose_name = 'image'
-        verbose_name_plural = 'images'
+        verbose_name = 'Product Variant Image'
+        verbose_name_plural = 'Product Variant Images'
     def __unicode__(self):
         return u'%s' % (self.image.url)
     def __str__(self):
@@ -139,8 +147,9 @@ class ProductImages(OrderedModel):
     image_img.short_description = 'image'
     image_img.allow_tags = True
 
-class ProductVideo(OrderedModel):
-    product      = models.ForeignKey('ProductVariant')
+class ProductVideo(SortableMixin):
+    order         = models.PositiveIntegerField(default=0, editable=False, db_index=True)
+    product      = SortableForeignKey('ProductVariant')
     name        = models.CharField('Name',default='', max_length=140)
     video       = EmbedVideoField()
     date         = models.DateField('Date added', auto_now_add=True)
@@ -153,7 +162,8 @@ class ProductVideo(OrderedModel):
         return u'%s' % (self.video.url)
     def __str__(self):
         return u'%s' % (self.name)
-class Category(OrderedModel):
+class Category(SortableMixin):
+    order         = models.PositiveIntegerField(default=0, editable=False, db_index=True)
     sku          = models.SlugField('SKU', unique=True, max_length=50, editable=False)
     publish      = models.BooleanField('Publish', default=False)
     name         = models.CharField('Name',default='', max_length=140)
@@ -302,7 +312,8 @@ class Store(SingletonModel):
     def __str__(self):
         return u'%s' % (self.name)
 
-class StoreImage(OrderedModel):
+class StoreImage(SortableMixin):
+    order         = models.PositiveIntegerField(default=0, editable=False, db_index=True)
     store = models.ForeignKey('Store')
     name  = models.CharField('Name',default='', max_length=140)
     image = models.ImageField('Image', upload_to=upload_image_to)
@@ -325,7 +336,8 @@ class StoreImage(OrderedModel):
     image_img.short_description = 'image'
     image_img.allow_tags = True
 
-class Press (OrderedModel):
+class Press (SortableMixin):
+    order         = models.PositiveIntegerField(default=0, editable=False, db_index=True)
     slug          = models.SlugField('Slug', unique=True, max_length=50, editable=False)
     publish       = models.BooleanField('Publish', default=False)
     title         = models.CharField('Title',default='', max_length=140)
@@ -351,8 +363,9 @@ class Press (OrderedModel):
         vids =  VideoPress.objects.filter(press=self)
         return vids
 
-class PressImage(OrderedModel):
-    press      = models.ForeignKey('Press')
+class PressImage(SortableMixin):
+    order         = models.PositiveIntegerField(default=0, editable=False, db_index=True)
+    press      = SortableForeignKey('Press')
     name         = models.CharField('Name',default='', max_length=140)
     image         = models.ImageField('Image', upload_to=upload_image_to)
     date         = models.DateField('Date added', auto_now_add=True)
@@ -374,8 +387,9 @@ class PressImage(OrderedModel):
     image_img.short_description = 'image'
     image_img.allow_tags = True
 
-class VideoPress(OrderedModel):
-    press      = models.ForeignKey('Press')
+class VideoPress(SortableMixin):
+    order         = models.PositiveIntegerField(default=0, editable=False, db_index=True)
+    press      = SortableForeignKey('Press')
     name         = models.CharField('Name',default='', max_length=140)
     video       = EmbedVideoField()
     date         = models.DateField('Date added', auto_now_add=True)
@@ -389,7 +403,8 @@ class VideoPress(OrderedModel):
     def __str__(self):
         return u'%s' % (self.name)
 
-class Stores(OrderedModel):
+class Stores(SortableMixin):
+    order         = models.PositiveIntegerField(default=0, editable=False, db_index=True)
     publish = models.BooleanField('Publish', default=False)
     slug = models.SlugField('Slug', unique=True, max_length=50, editable=False)
     name = models.CharField('Name',default='', max_length=140)

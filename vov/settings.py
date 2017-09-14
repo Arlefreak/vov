@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'nested_admin',
     'ckeditor',
-    'ordered_model',
+    'adminsortable',
     'import_export',
     'embed_video',
     'solo',

@@ -1,11 +1,10 @@
 from django.contrib import admin
 from django.urls import reverse
-from ordered_model.admin import OrderedModelAdmin
+from adminsortable.admin import SortableAdmin, SortableTabularInline
 from .models import Product, Category, ProductImages, ProductVariant, Press, PressImage, VideoPress, Stores, Store, StoreImage, ProductVideo
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 from solo.admin import SingletonModelAdmin
-import nested_admin
 from embed_video.admin import AdminVideoMixin
 
 class ProductResource(resources.ModelResource):
@@ -20,35 +19,40 @@ class CategoryResource(resources.ModelResource):
     class Meta:
         model = Category
 
-class productImagesInline(nested_admin.NestedStackedInline):
+class productImagesInline(SortableTabularInline):
     model = ProductImages
     extra = 1
+    classes = ['collapse']
 
-class productVideosInline(nested_admin.NestedStackedInline):
+class productVideosInline(SortableTabularInline):
     model = ProductVideo
     extra = 1
+    classes = ['collapse']
 
-class productVariantInline(nested_admin.NestedStackedInline):
+class productVariantInline(SortableTabularInline):
     model = ProductVariant
     extra = 0
     inlines = [productImagesInline, productVideosInline]
+    classes = ['collapse']
 
-class storeImagesInline(admin.TabularInline):
+class storeImagesInline(SortableTabularInline):
     model = StoreImage
     extra = 0
+    classes = ['collapse']
 
-class pressImageInline(admin.TabularInline):
+class pressImageInline(SortableTabularInline):
     model = PressImage
     extra = 0
+    classes = ['collapse']
 
-class pressVideoInline(admin.TabularInline):
+class pressVideoInline(SortableTabularInline):
     model = VideoPress
     extra = 0
+    classes = ['collapse']
 
 @admin.register(Product)
-class ProductAdmin(nested_admin.NestedModelAdmin, OrderedModelAdmin, ImportExportModelAdmin):
+class ProductAdmin(SortableAdmin, ImportExportModelAdmin):
     list_display = (
-        'move_up_down_links',
         'name',
         'price',
         # 'status',
@@ -76,9 +80,8 @@ class ProductAdmin(nested_admin.NestedModelAdmin, OrderedModelAdmin, ImportExpor
     admin_description.short_description = 'Description'
 
 @admin.register(Press)
-class PressAdmin(OrderedModelAdmin, ImportExportModelAdmin):
+class PressAdmin(SortableAdmin, ImportExportModelAdmin):
     list_display = (
-        'move_up_down_links',
         'publish',
         'title',
         'date_article',
@@ -95,9 +98,8 @@ class PressAdmin(OrderedModelAdmin, ImportExportModelAdmin):
     view_on_site.allow_tags = True
 
 @admin.register(ProductVariant)
-class ProductVariantAdmin(OrderedModelAdmin, ImportExportModelAdmin):
+class ProductVariantAdmin(SortableAdmin, ImportExportModelAdmin):
     list_display = (
-        'move_up_down_links',
         'parent_product',
         'product_variant',
         'inventory',
@@ -123,9 +125,8 @@ class ProductVariantAdmin(OrderedModelAdmin, ImportExportModelAdmin):
     product_variant.short_description = 'Variant'
 
 @admin.register(Category)
-class CategoryAdmin(OrderedModelAdmin, ImportExportModelAdmin):
+class CategoryAdmin(SortableAdmin, ImportExportModelAdmin):
     list_display = (
-        'move_up_down_links',
         'publish',
         'name',
         'admin_description',
@@ -156,9 +157,8 @@ class StoreAdmin(SingletonModelAdmin):
     inlines = [ storeImagesInline ]
 
 @admin.register(ProductImages)
-class ProductImageAdmin(OrderedModelAdmin):
+class ProductImageAdmin(SortableAdmin):
     list_display = (
-        'move_up_down_links',
         'parent_product',
         'product_variant',
         'image_img',
@@ -188,9 +188,8 @@ class ProductImageAdmin(OrderedModelAdmin):
     view_on_site.allow_tags = True
 
 @admin.register(ProductVideo)
-class ProductVideoAdmin(AdminVideoMixin, OrderedModelAdmin):
+class ProductVideoAdmin(AdminVideoMixin, SortableAdmin):
     list_display = (
-        'move_up_down_links',
         'order',
         'name',
         'product',
