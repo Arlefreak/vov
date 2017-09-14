@@ -132,9 +132,9 @@ class ProductImages(SortableMixin):
         verbose_name = 'Product Variant Image'
         verbose_name_plural = 'Product Variant Images'
     def __unicode__(self):
-        return u'%s - %s' % (self.product.name, self.name)
+        return u'%s' % (self.image.url)
     def __str__(self):
-        return u'%s - %s' % (self.product.name, self.name)
+        return u'%s' % (self.image.url)
 
     def image_img(self):
         if self.image:
