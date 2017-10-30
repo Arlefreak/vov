@@ -615,6 +615,12 @@ main.wrapper {
 .catalog li a:hover {
   color: #17ce4b;
 }
+.catalog li a p {
+  display: block;
+  height: 40px;
+  overflow: hidden;
+  margin: 20px auto 0 auto;
+}
 .catalog li div {
   width: 100%;
   padding: 0 0 100% 0;
