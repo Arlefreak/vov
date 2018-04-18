@@ -138,3 +138,4 @@ sftp-config.json
 
 .ropeproject/
 .env
+.venv
