@@ -1,9 +1,12 @@
 [[source]]
+
 url = "https://pypi.python.org/simple"
 verify_ssl = true
 name = "pypi"
 
+
 [packages]
+
 appdirs = "==1.4.3"
 bleach = "==2.0.0"
 boto = "==2.46.1"
@@ -31,7 +34,6 @@ gunicorn = "==19.7.0"
 msgpack-python = "==0.4.8"
 neovim = "==0.1.13"
 olefile = "==0.44"
-"psycopg2" = "==2.7.1"
 pyparsing = "==2.2.0"
 python-dateutil = "==2.6.0"
 python-monkey-business = "==1.0.0"
@@ -41,13 +43,18 @@ requests = "==2.13.0"
 six = "==1.10.0"
 tablib = "==0.11.4"
 webencodings = "==0.5"
-Collectfast = "==0.5.2"
-Django = "==1.10.6"
-Pillow = "==4.0.0"
-Unidecode = "==0.4.20"
-Markdown = "==2.6.8"
+collectfast = "==0.5.2"
+django = "==1.10.6"
+pillow = "==4.0.0"
+unidecode = "==0.4.20"
+markdown = "==2.6.8"
+"psycopg2-binary" = "*"
+
 
 [dev-packages]
 
+
+
 [requires]
+
 python_version = "3.6"
