@@ -5,7 +5,7 @@ import environ
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 root = environ.Path(__file__) - 3
-env = environ.Env(DEBUG=(bool, True),)
+env = environ.Env(DEBUG=(bool, True), )
 environ.Env.read_env()
 
 SECRET_KEY = env('SECRET_KEY')
@@ -13,7 +13,7 @@ DEBUG = env('DEBUG')
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = None
 
-if(DEBUG):
+if (DEBUG):
     ALLOWED_HOSTS = []
 else:
     ALLOWED_HOSTS = [
@@ -21,26 +21,14 @@ else:
         '.vvvvovvvv.com',
     ]
 
-ADMINS = (('Arlefreak', 'hi@arlefreak.com'),)
+ADMINS = (('Arlefreak', 'hi@arlefreak.com'), )
 
 INSTALLED_APPS = [
-    'storages',
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'rest_framework',
-    'nested_admin',
-    'ckeditor',
-    'adminsortable',
-    'import_export',
-    'embed_video',
-    'solo',
-    'taggit',
-    'taggit_serializer',
-    'store'
+    'storages', 'django.contrib.admin', 'django.contrib.auth',
+    'django.contrib.contenttypes', 'django.contrib.sessions',
+    'django.contrib.messages', 'django.contrib.staticfiles', 'rest_framework',
+    'nested_admin', 'ckeditor', 'adminsortable', 'import_export',
+    'embed_video', 'solo', 'taggit', 'taggit_serializer', 'store'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -75,37 +63,38 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'vov.wsgi.application'
 
-
 DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': env('DB_NAME'),
-            'USER': env('DB_USER'),
-            'PASSWORD': env('DB_PASSWORD'),
-            'HOST': env('DB_HOST'),
-            'PORT': env('DB_PORT'),
-            }
-        }
-
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': env('DB_NAME'),
+        'USER': env('DB_USER'),
+        'PASSWORD': env('DB_PASSWORD'),
+        'HOST': env('DB_HOST'),
+        'PORT': env('DB_PORT'),
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
@@ -114,10 +103,9 @@ LANGUAGE_CODE = 'en-MX'
 gettext = lambda s: s
 
 LANGUAGES = (
-        ('es-Mx', gettext('Spanish')),
-        ('en-us', gettext('English')),
-        )
-
+    ('es-Mx', gettext('Spanish')),
+    ('en-us', gettext('English')),
+)
 
 TIME_ZONE = 'UTC'
 
@@ -136,23 +124,29 @@ CKEDITOR_CONFIGS = {
 AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+
 AWS_QUERYSTRING_AUTH = False
 AWS_PRELOAD_METADATA = True
 
 if DEBUG:
     STATIC_URL = '/static/'
+    STATICFILES_LOCATION = 'static'
 else:
-    STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
     COLLECTFAST_ENABLED = True
-    STATIC_URL = 'http://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
+    STATICFILES_LOCATION = 'static'
+    STATICFILES_STORAGE = 'vov.custom_storages.StaticStorage'
+    STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN,
+                                     STATICFILES_LOCATION)
 
-ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
-CKEDITOR_UPLOAD_PATH = STATIC_URL + 'uploads/'
+MEDIA_ROOT = 'media'
 MEDIAFILES_LOCATION = 'media'
-AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
 DEFAULT_FILE_STORAGE = 'vov.custom_storages.MediaStorage'
+
+ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_IMAGE_BACKEND = 'pillow'
 
 # Email
 EMAIL_USE_TLS = True
