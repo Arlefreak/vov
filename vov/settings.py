@@ -10,6 +10,7 @@ environ.Env.read_env()
 
 SECRET_KEY = env('SECRET_KEY')
 DEBUG = env('DEBUG')
+DEBUG = False
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = None
 
@@ -17,11 +18,13 @@ if (DEBUG):
     ALLOWED_HOSTS = []
 else:
     ALLOWED_HOSTS = [
-        '.arlefreak.com',
+        '138.197.17.118',
+        '127.0.0.1',
+        'localhost',
         '.vvvvovvvv.com',
     ]
 
-ADMINS = (('Arlefreak', 'hi@arlefreak.com'), )
+ADMINS = (('afk', 'afk@ellugar.co'), )
 
 INSTALLED_APPS = [
     'storages', 'django.contrib.admin', 'django.contrib.auth',
@@ -129,12 +132,12 @@ AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 AWS_QUERYSTRING_AUTH = False
 AWS_PRELOAD_METADATA = True
 
+STATICFILES_LOCATION = 'static'
+
 if DEBUG:
     STATIC_URL = '/static/'
-    STATICFILES_LOCATION = 'static'
 else:
     COLLECTFAST_ENABLED = True
-    STATICFILES_LOCATION = 'static'
     STATICFILES_STORAGE = 'vov.custom_storages.StaticStorage'
     STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN,
                                      STATICFILES_LOCATION)
