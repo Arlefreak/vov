@@ -10,7 +10,6 @@ environ.Env.read_env()
 
 SECRET_KEY = env('SECRET_KEY')
 DEBUG = env('DEBUG')
-DEBUG = False
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = None
 
@@ -27,20 +26,19 @@ else:
 ADMINS = (('afk', 'afk@ellugar.co'), )
 
 INSTALLED_APPS = [
-    'storages', 'django.contrib.admin', 'django.contrib.auth',
+    'django.contrib.admin', 'django.contrib.auth',
     'django.contrib.contenttypes', 'django.contrib.sessions',
     'django.contrib.messages', 'django.contrib.staticfiles', 'rest_framework',
     'nested_admin', 'ckeditor', 'adminsortable', 'import_export',
     'embed_video', 'solo', 'taggit', 'taggit_serializer', 'store'
 ]
 
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]

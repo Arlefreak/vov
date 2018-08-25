@@ -29,7 +29,7 @@ class Product (SortableMixin):
     price         = models.FloatField('Price', default=0.0)
     discount      = models.FloatField('Discount', default=0.0)
     tags          = TaggableManager(blank=True)
-    category      = SortableForeignKey('Category')
+    category      = SortableForeignKey('Category', on_delete=models.CASCADE)
     statusChoices = (('IN','In stock'),('OUT','Out of stock'))
     status        = models.CharField('Status', choices=statusChoices, max_length=3, default='OUT', editable=False)
     date          = models.DateField('Date added', auto_now_add=True)
@@ -78,7 +78,7 @@ class Product (SortableMixin):
 
 class ProductVariant(SortableMixin):
     order         = models.PositiveIntegerField(default=0, editable=False, db_index=True)
-    product      = SortableForeignKey('Product')
+    product      = SortableForeignKey('Product', on_delete=models.CASCADE)
     name         = models.CharField('Name',default='', max_length=140)
     sku           = models.SlugField('SKU', unique=True, max_length=50, editable=False)
     inventory     = models.IntegerField('Inventory', default=0)
@@ -121,7 +121,7 @@ class ProductVariant(SortableMixin):
 
 class ProductImages(SortableMixin):
     order         = models.PositiveIntegerField(default=0, editable=False, db_index=True)
-    product      = SortableForeignKey('ProductVariant')
+    product      = SortableForeignKey('ProductVariant', on_delete=models.CASCADE)
     name         = models.CharField('Name',default='', max_length=140)
     image         = models.ImageField('Image', upload_to=upload_image_to)
     date         = models.DateField('Date added', auto_now_add=True)
@@ -149,7 +149,7 @@ class ProductImages(SortableMixin):
 
 class ProductVideo(SortableMixin):
     order         = models.PositiveIntegerField(default=0, editable=False, db_index=True)
-    product      = SortableForeignKey('ProductVariant')
+    product      = SortableForeignKey('ProductVariant', on_delete=models.CASCADE)
     name        = models.CharField('Name',default='', max_length=140)
     video       = EmbedVideoField()
     date         = models.DateField('Date added', auto_now_add=True)
@@ -203,8 +203,8 @@ class Client(models.Model):
         return u'%s' % (self.user.username)
 
 class ShoppingCartProduct(models.Model):
-    client   = models.ForeignKey('Client')
-    product  = models.ForeignKey('Product')
+    client   = models.ForeignKey('Client', on_delete=models.CASCADE)
+    product  = models.ForeignKey('Product', on_delete=models.CASCADE)
     cuantity = models.IntegerField()
     class Meta:
         ordering  = ['cuantity',]
@@ -224,9 +224,9 @@ class ShoppingCartProduct(models.Model):
 
 class Order(models.Model):
     sku               = models.SlugField('SKU', unique=True, max_length=50, editable=False)
-    client            = models.ForeignKey('Client')
-    shippingAdress    = models.ForeignKey('Adress',limit_choices_to={'type': 'SHI'}, related_name='shippingAdress')
-    billingAdress     = models.ForeignKey('Adress',limit_choices_to={'type': 'BIL'}, related_name='billingAdress')
+    client            = models.ForeignKey('Client', on_delete=models.CASCADE)
+    shippingAdress    = models.ForeignKey('Adress',limit_choices_to={'type': 'SHI'}, related_name='shippingAdress', on_delete=models.CASCADE)
+    billingAdress     = models.ForeignKey('Adress',limit_choices_to={'type': 'BIL'}, related_name='billingAdress', on_delete=models.CASCADE)
     items_subTotal    = models.FloatField(_('Items subtotal'), default=0)
     shipping_cost     = models.FloatField(_('Shipping cost'), default=0)
     taxes_cost        = models.FloatField(_('Taxes costs'), default =0)
@@ -251,7 +251,7 @@ class Order(models.Model):
         super(Order, self).save(**kwargs)
 
 class OrderProduct(models.Model):
-    product  = models.ForeignKey('Product')
+    product  = models.ForeignKey('Product', on_delete=models.CASCADE)
     cuantity = models.IntegerField()
     class Meta:
         ordering  = ['cuantity',]
@@ -263,7 +263,7 @@ class OrderProduct(models.Model):
         return u'%s' % (self.product.name)
 
 class Adress(models.Model):
-    client         = models.ForeignKey('Client')
+    client         = models.ForeignKey('Client', on_delete=models.CASCADE)
     name           = models.CharField('Name',default='', max_length=140)
     typeChoices    = (('BIL','Billing'),('SHI', 'Shipping'))
     type           = models.CharField('Type', choices=typeChoices, max_length=3, default='BIL')
@@ -314,7 +314,7 @@ class Store(SingletonModel):
 
 class StoreImage(SortableMixin):
     order         = models.PositiveIntegerField(default=0, editable=False, db_index=True)
-    store = models.ForeignKey('Store')
+    store = models.ForeignKey('Store', on_delete=models.CASCADE)
     name  = models.CharField('Name',default='', max_length=140)
     image = models.ImageField('Image', upload_to=upload_image_to)
     date  = models.DateField('Date added', auto_now_add=True)
@@ -365,7 +365,7 @@ class Press (SortableMixin):
 
 class PressImage(SortableMixin):
     order         = models.PositiveIntegerField(default=0, editable=False, db_index=True)
-    press      = SortableForeignKey('Press')
+    press      = SortableForeignKey('Press', on_delete=models.CASCADE)
     name         = models.CharField('Name',default='', max_length=140)
     image         = models.ImageField('Image', upload_to=upload_image_to)
     date         = models.DateField('Date added', auto_now_add=True)
@@ -389,7 +389,7 @@ class PressImage(SortableMixin):
 
 class VideoPress(SortableMixin):
     order         = models.PositiveIntegerField(default=0, editable=False, db_index=True)
-    press      = SortableForeignKey('Press')
+    press      = SortableForeignKey('Press', on_delete=models.CASCADE)
     name         = models.CharField('Name',default='', max_length=140)
     video       = EmbedVideoField()
     date         = models.DateField('Date added', auto_now_add=True)
