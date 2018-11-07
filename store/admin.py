@@ -293,4 +293,4 @@ class StoresAdmin(SortableAdmin):
         'name',
         'adress',
     )
-    l**optionoist_editable = ('publish', )
+    list_editable = ('publish', )
