@@ -28,6 +28,7 @@
     "errorhandler": "^1.4.2",
     "express": "^4.13.3",
     "method-override": "^2.3.5",
+    "natives": "^1.1.6",
     "react": "^15.3.2"
   },
   "devDependencies": {

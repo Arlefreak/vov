@@ -1,6 +1,7 @@
 from adminsortable.admin import SortableAdmin, SortableTabularInline
 from django.contrib import admin
 from django.urls import reverse
+from django.utils.safestring import mark_safe
 from embed_video.admin import AdminVideoMixin
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
@@ -91,9 +92,11 @@ class ProductAdmin(SortableAdmin, ImportExportModelAdmin):
     resource_class = ProductResource
     save_on_top = True
 
+    @mark_safe
     def admin_description(self, obj):
         return '<div style="max-width:300px">%s<div>' % obj.description
 
+    @mark_safe
     def view_on_site(self, obj):
         url = reverse('products', kwargs={'category_name': obj.category.sku})
         return '<a class="button" target="_blank" href="http://vvvvovvvv.com%s">View</a>' % url
@@ -121,6 +124,7 @@ class PressAdmin(SortableAdmin, ImportExportModelAdmin):
         'slug',
     )
 
+    @mark_safe
     def view_on_site(self, obj):
         url = reverse('press_single', kwargs={'press_name': obj.slug})
         return '<a class="button" target="_blank" href="http://vvvvovvvv.com%s">View</a>' % url
@@ -157,6 +161,7 @@ class ProductVariantAdmin(SortableAdmin, ImportExportModelAdmin):
     def parent_product(self, obj):
         return obj.product.name
 
+    @mark_safe
     def view_on_site(self, obj):
         url = reverse(
             'product',
@@ -187,9 +192,11 @@ class CategoryAdmin(SortableAdmin, ImportExportModelAdmin):
     resource_class = CategoryResource
     inlines = [productInline]
 
+    @mark_safe
     def admin_description(self, obj):
         return '<div style="max-width:300px">%s<div>' % obj.description
 
+    @mark_safe
     def view_on_site(self, obj):
         url = reverse('products', kwargs={'category_name': obj.sku})
         return '<a class="button" target="_blank" href="http://vvvvovvvv.com%s">View</a>' % url
@@ -237,6 +244,7 @@ class ProductImageAdmin(SortableAdmin):
     def parent_product(self, obj):
         return obj.product.product
 
+    @mark_safe
     def view_on_site(self, obj):
         url = reverse(
             'product',
@@ -285,4 +293,4 @@ class StoresAdmin(SortableAdmin):
         'name',
         'adress',
     )
-    list_editable = ('publish', )
+    l**optionoist_editable = ('publish', )

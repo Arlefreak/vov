@@ -5,14 +5,18 @@
     {% for item in p_list %}
     <article class="center-both-parent" style="background-image: url('{{item.image.url}}');">
         <div class="center-both-child">
-            <a href="{% url 'productSingle' single.sku item.sku %}">
-                <img class="logo" src="{% static "img/vvvvovvvvWhite.svg"%}" alt="logo">
-                <span>+</span>
-                <h2>{{ item.name }}</h2>
-            </a>
+            {% if item.external %}
+            <a rel="noopener noreferrer" target="_blank" href="{{ item.external }}">
+                {% else %}
+                <a href="{% url 'productSingle' single.sku item.sku %}">
+                    {% endif %}
+                    <img class="logo" src="{% static "img/vvvvovvvvWhite.svg"%}" alt="logo">
+                    <span>+</span>
+                    <h2>{{ item.name }}</h2>
+                </a>
         </div>
     </article>
     {% endfor %}
-    </main>
+</main>
 {% endblock %}
 {% block footer %}{% endblock %}
