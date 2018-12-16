@@ -14,56 +14,6 @@ from store.serializers import (AdressSerializer, CategorySerializer,
 from taggit.models import Tag
 from taggit_serializer.serializers import TaggitSerializer
 
-# class ProductViewSet(viewsets.ModelViewSet):
-#     queryset           = Product.objects.all()
-#     serializer_class   = ProductSerializer
-#     filter_backends = (filters.DjangoFilterBackend,)
-#     filter_fields = ('category','category__name', 'status')
-#     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-
-# class ProductImagesViewset(viewsets.ModelViewSet):
-#     queryset           = ProductImages.objects.all()
-#     serializer_class   = ProductImageSerializer
-#     filter_backends = (filters.DjangoFilterBackend,)
-#     filter_fields = ('product','product__name',)
-#     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-
-# class CategoryViewset(viewsets.ModelViewSet):
-#     queryset           = Category.objects.all()
-#     serializer_class   = CategorySerializer
-#     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-
-# class UserViewset(viewsets.ModelViewSet):
-#     queryset           = User.objects.all()
-#     serializer_class   = UserSerializer
-#     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-
-# class ShoppingCartProductViewset(viewsets.ModelViewSet):
-#     queryset           = ShoppingCartProduct.objects.all()
-#     serializer_class   = ShoppingCartProductSerializer
-#     filter_backends = (filters.DjangoFilterBackend,)
-#     filter_fields = ('client',)
-#     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-
-# class OrderViewSet(viewsets.ModelViewSet):
-#     queryset           = Order.objects.all()
-#     serializer_class   = OrderSerializer
-#     filter_backends = (filters.DjangoFilterBackend,)
-#     filter_fields = ('client',)
-#     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-
-# class AdressViewSet(viewsets.ModelViewSet):
-#     queryset           = Adress.objects.all()
-#     serializer_class   = AdressSerializer
-#     filter_backends = (filters.DjangoFilterBackend,)
-#     filter_fields = ('client',)
-#     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-
-# class TaggitViewSet(viewsets.ModelViewSet):
-#     queryset           = Tag.objects.all()
-#     serializer_class   = TaggitSerializer
-#     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-
 
 def HomeView(request):
     p_list = ""
@@ -119,7 +69,8 @@ def CategoryListView(request):
 
 
 def ColaboracionesView(request):
-    p_list = Product.objects.filter(category__sku='colaboraciones')
+    p_list = Product.objects.filter(
+        category__sku='colaboraciones', publish=True)
     single = get_object_or_404(Category, sku='colaboraciones')
     title = single.name
     description = strip_tags(single.description)
@@ -137,7 +88,8 @@ def ColaboracionesView(request):
 
 def ColaboracionesSingleView(request, category_name, product_name):
     single = get_object_or_404(Product, sku=product_name)
-    p_list = ProductVariant.objects.filter(product__sku=product_name)
+    p_list = ProductVariant.objects.filter(
+        product__sku=product_name, publish=True)
     title = single.name
     description = strip_tags(single.description)
     previewImage = Store.get_solo().image.url
@@ -154,9 +106,10 @@ def ColaboracionesSingleView(request, category_name, product_name):
 
 def ProductsListView(request, category_name):
     p_list = ProductVariant.objects.filter(
-        product__category__sku=category_name)
+        product__category__sku=category_name, publish=True)
     if (p_list is None):
-        p_list = Product.objects.filter(category__sku=category_name)
+        p_list = Product.objects.filter(
+            category__sku=category_name, publish=True)
     single = get_object_or_404(Category, sku=category_name)
     title = single.name
     description = clean(single.description, strip=True)
@@ -185,7 +138,10 @@ def ProductsListView(request, category_name):
 def ProductsSingleView(request, category_name, product_name, variant_name):
     # p_list = get_object_or_404(Product, sku=product_name, category__sky=category_name)
     p_list = get_object_or_404(
-        ProductVariant, sku=variant_name, product__sku=product_name)
+        ProductVariant,
+        sku=variant_name,
+        product__sku=product_name,
+    )
     v_list = p_list.video_gallery
     p_list = p_list.gallery
     single = get_object_or_404(Product, sku=product_name)

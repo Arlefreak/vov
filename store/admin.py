@@ -72,16 +72,21 @@ class pressVideoInline(SortableTabularInline):
 
 @admin.register(Product)
 class ProductAdmin(SortableAdmin, ImportExportModelAdmin):
+    actions = ['toggle_publish']
     list_display = (
         'name',
         'price',
+        'publish',
         # 'status',
         # 'date',
         'admin_description',
         # 'image_img',
         'view_on_site',
     )
-    list_editable = ('price', )
+    list_editable = (
+        'price',
+        'publish',
+    )
     list_display_links = ('name', 'admin_description')
     inlines = [productVariantInline]
     list_filter = ('category', )
@@ -100,6 +105,9 @@ class ProductAdmin(SortableAdmin, ImportExportModelAdmin):
     def view_on_site(self, obj):
         url = reverse('products', kwargs={'category_name': obj.category.sku})
         return '<a class="button" target="_blank" href="http://vvvvovvvv.com%s">View</a>' % url
+
+    def toggle_publish(self, request, queryset):
+        queryset.update(publish=True)
 
     view_on_site.allow_tags = True
     admin_description.allow_tags = True
@@ -134,7 +142,10 @@ class PressAdmin(SortableAdmin, ImportExportModelAdmin):
 
 @admin.register(ProductVariant)
 class ProductVariantAdmin(SortableAdmin, ImportExportModelAdmin):
+    actions = ['toggle_publish']
+
     list_display = (
+        'publish',
         'parent_product',
         'product_variant',
         'inventory',
@@ -142,13 +153,16 @@ class ProductVariantAdmin(SortableAdmin, ImportExportModelAdmin):
         'image_img',
         'view_on_site',
     )
-    list_editable = ('inventory', )
+    list_editable = (
+        'publish',
+        'inventory',
+    )
     list_display_links = (
         'parent_product',
         'product_variant',
     )
     inlines = [productImagesInline, productVideosInline]
-    list_filter = ('product', )
+    list_filter = ('product', 'publish')
     search_fields = (
         'name',
         'sku',
@@ -160,6 +174,9 @@ class ProductVariantAdmin(SortableAdmin, ImportExportModelAdmin):
 
     def parent_product(self, obj):
         return obj.product.name
+
+    def toggle_publish(self, request, queryset):
+        queryset.update(publish=True)
 
     @mark_safe
     def view_on_site(self, obj):
@@ -179,6 +196,7 @@ class ProductVariantAdmin(SortableAdmin, ImportExportModelAdmin):
 
 @admin.register(Category)
 class CategoryAdmin(SortableAdmin, ImportExportModelAdmin):
+    actions = ['toggle_publish']
     list_display = (
         'publish',
         'name',
@@ -191,6 +209,9 @@ class CategoryAdmin(SortableAdmin, ImportExportModelAdmin):
     search_fields = ('name', )
     resource_class = CategoryResource
     inlines = [productInline]
+
+    def toggle_publish(self, request, queryset):
+        queryset.update(publish=True)
 
     @mark_safe
     def admin_description(self, obj):

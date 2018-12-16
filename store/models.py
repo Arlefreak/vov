@@ -6,6 +6,7 @@ from adminsortable.models import SortableMixin
 from ckeditor.fields import RichTextField
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 from django_countries.fields import CountryField
 from embed_video.fields import EmbedVideoField
@@ -28,6 +29,7 @@ class Product(SortableMixin):
     sku = models.SlugField('SKU', unique=True, max_length=50, editable=False)
     order = models.PositiveIntegerField(
         default=0, editable=False, db_index=True)
+    publish = models.BooleanField('Publish', default=False)
     name = models.CharField('Name', default='', max_length=140)
     description = RichTextField('Description', default='', blank=True)
     image = models.ImageField(
@@ -71,6 +73,7 @@ class Product(SortableMixin):
             self.status = 'OUT'
         super(Product, self).save(**kwargs)
 
+    @mark_safe
     def image_img(self):
         if self.image:
             return u'<img src="%s" style="width: 100px;'\
@@ -99,6 +102,7 @@ class Product(SortableMixin):
 class ProductVariant(SortableMixin):
     order = models.PositiveIntegerField(
         default=0, editable=False, db_index=True)
+    publish = models.BooleanField('Publish', default=False)
     product = SortableForeignKey('Product', on_delete=models.CASCADE)
     name = models.CharField('Name', default='', max_length=140)
     sku = models.SlugField('SKU', unique=True, max_length=50, editable=False)
@@ -137,6 +141,7 @@ class ProductVariant(SortableMixin):
             return 'No Image'
         return
 
+    @mark_safe
     def image_img(self):
         image = ProductImages.objects.filter(product=self).first()
         if image:
@@ -170,6 +175,7 @@ class ProductImages(SortableMixin):
     def __str__(self):
         return u'%s' % (self.image.url)
 
+    @mark_safe
     def image_img(self):
         if self.image:
             return u'<a href="{0}" target="_blank">\
@@ -231,6 +237,7 @@ class Category(SortableMixin):
         self.sku = uuslug(self.name, instance=self, slug_field='sku')
         super(Category, self).save(**kwargs)
 
+    @mark_safe
     def image_img(self):
         if self.image:
             return u'<img src="%s" style="height: 150px;'\
@@ -439,6 +446,7 @@ class StoreImage(SortableMixin):
     def __str__(self):
         return u'%s' % (self.image.url)
 
+    @mark_safe
     def image_img(self):
         if self.image:
             return u'<img src="%s" style="height: 150px;'\
@@ -505,6 +513,7 @@ class PressImage(SortableMixin):
     def __str__(self):
         return u'%s' % (self.image.url)
 
+    @mark_safe
     def image_img(self):
         if self.image:
             return u'<img src="%s" style="width: 100px;'\
